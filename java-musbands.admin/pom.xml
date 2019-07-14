@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <parent>
+    <groupId>org.sylrsykssoft</groupId>
+    <artifactId>java-musbands</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../</relativePath>
+  </parent>
+  
+  <artifactId>java-musbands.admin</artifactId>
+  <packaging>pom</packaging>
+  <name>java-musbands.admin</name>
+  <description>Musbands Admin Rest API</description>
+  <url>https://github.com/sylarsykes/java-musbands/tree/develop/java-musbands.admin</url>
+  
+  <properties>
+    <main.basedir>${basedir}/../</main.basedir>
+    
+    <!-- Musbands Admin Dependencies -->
+    <java-musbands.admin.version>${project.version}</java-musbands.admin.version>
+    <java-musbands.admin.library.version>${project.version}</java-musbands.admin.library.version>
+    <java-musbands.admin.musical-genre.version>${project.version}</java-musbands.admin.musical-genre.version>
+  </properties>
+  
+  <dependencies>
+  
+  	<!-- 3rd Dependencies -->
+  	<!-- Configure lombok in your IDE -->
+	<!-- https://www.baeldung.com/lombok-ide -->
+	<dependency>
+		<groupId>org.projectlombok</groupId>
+		<artifactId>lombok</artifactId>
+		<scope>provided</scope>
+	</dependency>
+  	
+  	<dependency>
+   		<groupId>org.mariadb.jdbc</groupId>
+   		<artifactId>mariadb-java-client</artifactId>
+	</dependency>
+	
+	<dependency>
+	    <groupId>org.springframework.boot</groupId>
+	    <artifactId>spring-boot-starter-data-rest</artifactId>
+	</dependency>
+
+  </dependencies>
+  
+  <modules>
+    <module>java-musbands.admin.library</module>
+   	<module>java-musbands.admin.musical-genre</module>
+  </modules>
+</project>
