@@ -59,7 +59,7 @@ public class MusicalGenreServiceTest {
 		Assert.assertNotNull(musicalGenres);
 	}
 	
-//	@Test
+	@Test
 	public void testUpdateMusicalGenre() {
 		String name = "Pop punk";
 		Optional<MusicalGenreResource> optResource = musicalGenreService.findByName(name);
@@ -74,7 +74,7 @@ public class MusicalGenreServiceTest {
 		assertThat("Entity id did not match!", resourceUpdated.getEntityId(), is(resourceGet.getEntityId()));
 	}
 	
-//	@Test
+	@Test
 	public void testDeleteMusicalGenre() {
 		String name = "Pop punk";
 		Optional<MusicalGenreResource> optResource = musicalGenreService.findByName(name);
