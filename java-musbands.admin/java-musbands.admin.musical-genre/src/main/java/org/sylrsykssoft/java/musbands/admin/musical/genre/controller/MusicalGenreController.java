@@ -7,12 +7,17 @@ import javax.validation.Valid;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.sylrsykssoft.coreapi.framework.database.exception.NotFoundEntityException;
 import org.sylrsykssoft.coreapi.framework.database.exception.NotIdMismatchEntityException;
@@ -26,9 +31,12 @@ import org.sylrsykssoft.java.musbands.admin.musical.genre.service.MusicalGenreSe
  * Rest Controller for Musical Genre API
  * 
  * @author juan.gonzalez.fernandez.jgf
+ * 
+ * @see https://restfulapi.net/http-methods/
  *
  */
 @RestController
+@RequestMapping("/admin/musicalGenres")
 public class MusicalGenreController extends BaseAdminController<MusicalGenreResource, MusicalGenre> {
 
 	@Autowired
@@ -40,9 +48,8 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	 * @return
 	 * @throws NotFoundEntityException
 	 */
-	@GetMapping("/admin/musicalGenres")
-	@ResponseBody
-	public List<MusicalGenreResource> findAll() throws NotFoundEntityException {
+	@GetMapping
+	public @ResponseBody List<MusicalGenreResource> findAll() throws NotFoundEntityException {
 		final List<MusicalGenreResource> result = musicalGenreService.findAll();
 		if (result == null) {
 			throw new NotFoundEntityException();
@@ -61,9 +68,8 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	 * 
 	 * @throws NotFoundEntityException
 	 */
-	@GetMapping(path = "/admin/musicalGenres/{name}")
-	@ResponseBody
-	public MusicalGenreResource findByName(@PathVariable final String name) throws NotFoundEntityException {
+	@GetMapping(path = "/name/{name}")
+	public @ResponseBody MusicalGenreResource findByName(@PathVariable final String name) throws NotFoundEntityException {
 		final Optional<MusicalGenreResource> result = musicalGenreService.findByName(name);
 		return result.get();
 	}
@@ -78,9 +84,8 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	 * 
 	 * @throws NotFoundEntityException
 	 */
-	@GetMapping("/admin/musicalGenres/{id}")
-	@ResponseBody
-	public MusicalGenreResource findOne(@PathVariable final Integer id) throws NotFoundEntityException {
+	@GetMapping("/{id}")
+	public @ResponseBody MusicalGenreResource findOne(@PathVariable final Integer id) throws NotFoundEntityException {
 		final Optional<MusicalGenreResource> result = musicalGenreService.findById(id);
 		return result.get();
 	}
@@ -93,9 +98,9 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	 * 
 	 * @return T entity.
 	 */
-	@PutMapping("/admin/musicalGenres")
-	@ResponseBody
-	public MusicalGenreResource create(@Valid @RequestBody final MusicalGenreResource entity) {
+	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+	public @ResponseBody MusicalGenreResource create(@Valid @RequestBody final MusicalGenreResource entity) {
 		return musicalGenreService.save(entity);
 	}
 
@@ -112,9 +117,9 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	 * @throws NotIdMismatchEntityException
 	 * @throws NotFoundEntityException
 	 */
-	@PutMapping("/admin/musicalGenres/{id}")
-	@ResponseBody
-	public MusicalGenreResource update(@Valid @RequestBody final MusicalGenreResource entity, final @PathVariable Integer id)
+	@PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.OK)
+	public @ResponseBody MusicalGenreResource update(@Valid @RequestBody final MusicalGenreResource entity, final @PathVariable Integer id)
 			throws NotIdMismatchEntityException, NotFoundEntityException {
 
 		if (ObjectUtils.notEqual(entity.getEntityId(), id)) {
@@ -133,7 +138,8 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	 * @throws NotFoundEntityException
 	 * @throws AppException
 	 */
-	@DeleteMapping("/admin/musicalGenres/{id}")
+	@DeleteMapping("/{id}")
+	@ResponseStatus(HttpStatus.OK)
 	public void delete(@PathVariable final Integer id) throws NotFoundEntityException, MusicalGenreException {
 		try {
 			musicalGenreService.deleteById(id);
