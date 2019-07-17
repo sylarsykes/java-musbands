@@ -7,7 +7,9 @@ import java.beans.ConstructorProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
+import org.springframework.stereotype.Component;
 import org.sylrsykssoft.coreapi.framework.library.mapper.ModelMapperFunction;
+import org.sylrsykssoft.java.musbands.admin.musical.genre.configuration.MusicalGenreConstants;
 import org.sylrsykssoft.java.musbands.admin.musical.genre.domain.MusicalGenre;
 import org.sylrsykssoft.java.musbands.admin.musical.genre.resource.MusicalGenreResource;
 
@@ -17,6 +19,7 @@ import org.sylrsykssoft.java.musbands.admin.musical.genre.resource.MusicalGenreR
  * 
  * @author juan.gonzalez.fernandez.jgf
  */
+@Component(MusicalGenreConstants.RESOURCE_ASSEMBLER_NAME)
 public class MusicalGenreResourceAssembler extends ResourceAssemblerSupport<MusicalGenre, MusicalGenreResource> {
 
 	/** The entity class. */

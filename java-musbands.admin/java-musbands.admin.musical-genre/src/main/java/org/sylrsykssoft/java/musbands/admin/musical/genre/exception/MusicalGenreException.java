@@ -2,6 +2,8 @@ package org.sylrsykssoft.java.musbands.admin.musical.genre.exception;
 
 import java.beans.ConstructorProperties;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.sylrsykssoft.coreapi.framework.library.error.exception.CoreApiFrameworkLibraryException;
 
 /**
@@ -10,6 +12,7 @@ import org.sylrsykssoft.coreapi.framework.library.error.exception.CoreApiFramewo
  * @author juan.gonzalez.fernandez.jgf
  *
  */
+@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 public class MusicalGenreException extends CoreApiFrameworkLibraryException {
 	private static final long serialVersionUID = 4594253434183319508L;
 

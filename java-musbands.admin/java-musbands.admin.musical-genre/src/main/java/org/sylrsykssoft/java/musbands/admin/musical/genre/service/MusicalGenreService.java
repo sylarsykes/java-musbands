@@ -5,10 +5,13 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.sylrsykssoft.coreapi.framework.database.exception.NotFoundEntityException;
 import org.sylrsykssoft.coreapi.framework.library.mapper.ModelMapperFunction;
 import org.sylrsykssoft.coreapi.framework.service.BaseAdminService;
+import org.sylrsykssoft.java.musbands.admin.musical.genre.configuration.MusicalGenreConstants;
 import org.sylrsykssoft.java.musbands.admin.musical.genre.domain.MusicalGenre;
 import org.sylrsykssoft.java.musbands.admin.musical.genre.resource.MusicalGenreResource;
 
@@ -19,15 +22,16 @@ import org.sylrsykssoft.java.musbands.admin.musical.genre.resource.MusicalGenreR
  *
  * @param <T> Type class.
  */
-@Service("musicalGenreService")
+@Service(MusicalGenreConstants.SERVICE_NAME)
+@CacheConfig(cacheNames = MusicalGenreConstants.CACHE_NAME, cacheManager = MusicalGenreConstants.CACHE_MANGER_BEAN_NAME)
 public class MusicalGenreService extends BaseAdminService<MusicalGenre, MusicalGenreResource> {
 
 	@Autowired
-	@Qualifier("musicalGenreMapperToResourceFunction")
+	@Qualifier(MusicalGenreConstants.MAPPER_RESOURCE_FUNCTION)
 	private ModelMapperFunction<MusicalGenre, MusicalGenreResource> musicalGenreMapperToResource;
 	
 	@Autowired
-	@Qualifier("musicalGenreMapperToEntityFunction")
+	@Qualifier(MusicalGenreConstants.MAPPER_ENTITY_FUNCTION)
 	private ModelMapperFunction<MusicalGenreResource, MusicalGenre> musicalGenreMapperToEntity;
 	
 	/**
@@ -35,7 +39,8 @@ public class MusicalGenreService extends BaseAdminService<MusicalGenre, MusicalG
 	 * 
 	 * Refresh all the entries in the cache to load new ones
 	 */
-	@Override()
+	@Override
+	@Cacheable(value = MusicalGenreConstants.CACHE_NAME, key = "#root.method", unless = "#result == null")
 	public Optional<MusicalGenreResource> findByName(final String name) throws NotFoundEntityException {
 		return super.findByName(name);
 	}
@@ -47,6 +52,7 @@ public class MusicalGenreService extends BaseAdminService<MusicalGenre, MusicalG
 	 * Refresh all the entries in the cache to load new ones
 	 */
 	@Override
+	@Cacheable(value = MusicalGenreConstants.CACHE_NAME, key = "#root.method", unless = "#result == null")
 	public List<MusicalGenreResource> findAll() {
 		return super.findAll();
 	}

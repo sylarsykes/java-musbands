@@ -6,6 +6,7 @@ import javax.persistence.Table;
 
 import org.sylrsykssoft.coreapi.framework.api.model.BaseAdmin;
 import org.sylrsykssoft.coreapi.framework.database.model.listener.BaseListener;
+import org.sylrsykssoft.java.musbands.admin.musical.genre.configuration.MusicalGenreConstants;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -21,13 +22,13 @@ import lombok.Setter;
  * @author juan.gonzalez.fernandez.jgf
  *
  */
-@Table(name = "musical_genre")
-@Entity()
-@Data()
+@Table(name = MusicalGenreConstants.REPOSITORY_TABLE_NAME)
+@Entity(name = MusicalGenreConstants.REPOSITORY_ENTITY_NAME)
+@Data
 @Builder(toBuilder = true)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
-@Setter()
-@Getter()
+@Setter
+@Getter
 @EqualsAndHashCode(callSuper = true, doNotUseGetters = true)
 @EntityListeners({BaseListener.class})
 public class MusicalGenre extends BaseAdmin {

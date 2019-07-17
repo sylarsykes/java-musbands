@@ -7,9 +7,10 @@ import javax.transaction.Transactional;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.sylrsykssoft.coreapi.framework.database.repository.BaseAdminRepository;
+import org.sylrsykssoft.java.musbands.admin.musical.genre.configuration.MusicalGenreConstants;
 import org.sylrsykssoft.java.musbands.admin.musical.genre.domain.MusicalGenre;
 
-@RepositoryRestResource(collectionResourceRel = "musical_genre", path = "musical_genre")
+@RepositoryRestResource(collectionResourceRel = MusicalGenreConstants.REPOSITORY_REST_COLLECTION_RESOURCE_REL, path = MusicalGenreConstants.REPOSITORY_REST_RESOURCE_PATH)
 @Transactional
 public interface MusicalGenreRepository extends BaseAdminRepository<MusicalGenre> {
 
