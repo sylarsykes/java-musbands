@@ -22,10 +22,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.sylrsykssoft.coreapi.framework.database.exception.NotFoundEntityException;
 import org.sylrsykssoft.coreapi.framework.database.exception.NotIdMismatchEntityException;
 import org.sylrsykssoft.coreapi.framework.web.BaseAdminController;
+import org.sylrsykssoft.java.musbands.admin.musical.genre.configuration.MusicalGenreConstants;
 import org.sylrsykssoft.java.musbands.admin.musical.genre.domain.MusicalGenre;
 import org.sylrsykssoft.java.musbands.admin.musical.genre.exception.MusicalGenreException;
 import org.sylrsykssoft.java.musbands.admin.musical.genre.resource.MusicalGenreResource;
 import org.sylrsykssoft.java.musbands.admin.musical.genre.service.MusicalGenreService;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Rest Controller for Musical Genre API
@@ -35,8 +38,9 @@ import org.sylrsykssoft.java.musbands.admin.musical.genre.service.MusicalGenreSe
  * @see https://restfulapi.net/http-methods/
  *
  */
-@RestController
-@RequestMapping("/admin/musicalGenres")
+@RestController(MusicalGenreConstants.CONTROLLER_NAME)
+@RequestMapping(MusicalGenreConstants.CONTROLLER_REQUEST_MAPPING)
+@Slf4j
 public class MusicalGenreController extends BaseAdminController<MusicalGenreResource, MusicalGenre> {
 
 	@Autowired
@@ -48,12 +52,17 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	 * @return
 	 * @throws NotFoundEntityException
 	 */
+	@Override
 	@GetMapping
 	public @ResponseBody List<MusicalGenreResource> findAll() throws NotFoundEntityException {
+		LOGGER.info("MusicalGenreController::findAll");
+		
 		final List<MusicalGenreResource> result = musicalGenreService.findAll();
 		if (result == null) {
 			throw new NotFoundEntityException();
 		}
+		
+		LOGGER.info("MusicalGenreController::findAll Result -> {}", result);
 
 		return result;
 	}
@@ -68,9 +77,14 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	 * 
 	 * @throws NotFoundEntityException
 	 */
-	@GetMapping(path = "/name/{name}")
+	@GetMapping(path = MusicalGenreConstants.CONTROLLER_GET_FIND_BY_NAME_MAPPING, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody MusicalGenreResource findByName(@PathVariable final String name) throws NotFoundEntityException {
+		LOGGER.info("MusicalGenreController::findByName Finding a entry with name: {}", name);
+		
 		final Optional<MusicalGenreResource> result = musicalGenreService.findByName(name);
+		
+		LOGGER.info("MusicalGenreController::findByName Result -> {}", result.get());
+		
 		return result.get();
 	}
 
@@ -84,9 +98,14 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	 * 
 	 * @throws NotFoundEntityException
 	 */
-	@GetMapping("/{id}")
+	@GetMapping(path = MusicalGenreConstants.CONTROLLER_GET_FIND_BY_ID, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody MusicalGenreResource findOne(@PathVariable final Integer id) throws NotFoundEntityException {
+		LOGGER.info("MusicalGenreController::findOne Finding a entry with id: {}", id);
+		
 		final Optional<MusicalGenreResource> result = musicalGenreService.findById(id);
+		
+		LOGGER.info("MusicalGenreController::findOne Result -> {}", result.get());
+		
 		return result.get();
 	}
 
@@ -98,10 +117,17 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	 * 
 	 * @return T entity.
 	 */
+	@Override
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
 	public @ResponseBody MusicalGenreResource create(@Valid @RequestBody final MusicalGenreResource entity) {
-		return musicalGenreService.save(entity);
+		LOGGER.info("MusicalGenreController::update Creating a entry: {}", entity);
+		
+		final MusicalGenreResource result = musicalGenreService.save(entity);
+		
+		LOGGER.info("MusicalGenreController::update Result -> {}", result);
+		
+		return result;
 	}
 
 	/**
@@ -117,16 +143,21 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	 * @throws NotIdMismatchEntityException
 	 * @throws NotFoundEntityException
 	 */
-	@PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Override
+	@PutMapping(path = MusicalGenreConstants.CONTROLLER_PUT_UPDATE, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody MusicalGenreResource update(@Valid @RequestBody final MusicalGenreResource entity, final @PathVariable Integer id)
-			throws NotIdMismatchEntityException, NotFoundEntityException {
-
+	public @ResponseBody MusicalGenreResource update(@Valid @RequestBody final MusicalGenreResource entity, final @PathVariable Integer id) throws NotIdMismatchEntityException, NotFoundEntityException {
+		LOGGER.info("MusicalGenreController::update Updating a entry with id: {}", id);
+		
 		if (ObjectUtils.notEqual(entity.getEntityId(), id)) {
 			throw new NotIdMismatchEntityException();
 		}
 		
-		return musicalGenreService.save(entity);
+		final MusicalGenreResource result = musicalGenreService.save(entity); 
+		
+		LOGGER.info("MusicalGenreController::update Result -> {}", result);
+		
+		return result;
 	}
 
 	/**
@@ -138,13 +169,16 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	 * @throws NotFoundEntityException
 	 * @throws AppException
 	 */
-	@DeleteMapping("/{id}")
+	@Override
+	@DeleteMapping(path = MusicalGenreConstants.CONTROLLER_DELETE_DELETE)
 	@ResponseStatus(HttpStatus.OK)
 	public void delete(@PathVariable final Integer id) throws NotFoundEntityException, MusicalGenreException {
+		LOGGER.info("MusicalGenreController::delete Deleting a entry with id: {}", id);
+		
 		try {
 			musicalGenreService.deleteById(id);
 		} catch (Exception e) {
-			throw new MusicalGenreException();
+			throw new MusicalGenreException(e);
 		}
 	}
 	

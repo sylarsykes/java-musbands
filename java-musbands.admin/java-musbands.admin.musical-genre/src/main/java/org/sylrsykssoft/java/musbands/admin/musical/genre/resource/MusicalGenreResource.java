@@ -34,6 +34,8 @@ public class MusicalGenreResource extends BaseAdminResource {
 	 * @param description
 	 * @param createdAt
 	 * @param updatedAt
+	 * 
+	 * @see MusicalGenreConstants.RESOURCE_BUILDER_NAME
 	 */
 	@Builder(builderMethodName = "musicalGenreResourceBuilder")
 	public MusicalGenreResource(final Integer entityId, final String name, final String description, final LocalDateTime createdAt, final LocalDateTime updatedAt, final LocalDateTime removedAt) {

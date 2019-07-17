@@ -32,7 +32,7 @@ public class MusicalGenreMapperConfiguration {
 	 *
 	 * @return the model mapper function
 	 */
-	@Bean
+	@Bean(MusicalGenreConstants.MAPPER_RESOURCE_FUNCTION)
 	@Scope(value = "prototype")
 	@Lazy(value = true)
 	public ModelMapperFunction<MusicalGenre, MusicalGenreResource> musicalGenreMapperToResourceFunction() {
@@ -44,7 +44,7 @@ public class MusicalGenreMapperConfiguration {
 	 *
 	 * @return the model mapper function
 	 */
-	@Bean
+	@Bean(MusicalGenreConstants.MAPPER_ENTITY_FUNCTION)
 	@Scope(value = "prototype")
 	@Lazy(value = true)
 	public ModelMapperFunction<MusicalGenreResource, MusicalGenre> musicalGenreMapperToEntityFunction() {
