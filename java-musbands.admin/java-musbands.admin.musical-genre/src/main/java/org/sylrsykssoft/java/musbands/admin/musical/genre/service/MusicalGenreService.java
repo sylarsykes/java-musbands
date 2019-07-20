@@ -26,26 +26,25 @@ import org.sylrsykssoft.java.musbands.admin.musical.genre.resource.MusicalGenreR
 @CacheConfig(cacheNames = MusicalGenreConstants.CACHE_NAME, cacheManager = MusicalGenreConstants.CACHE_MANGER_BEAN_NAME)
 public class MusicalGenreService extends BaseAdminService<MusicalGenre, MusicalGenreResource> {
 
+	/** Mapper resource bean */
 	@Autowired
 	@Qualifier(MusicalGenreConstants.MAPPER_RESOURCE_FUNCTION)
 	private ModelMapperFunction<MusicalGenre, MusicalGenreResource> musicalGenreMapperToResource;
 	
+	/** Mapper entity bean */
 	@Autowired
 	@Qualifier(MusicalGenreConstants.MAPPER_ENTITY_FUNCTION)
 	private ModelMapperFunction<MusicalGenreResource, MusicalGenre> musicalGenreMapperToEntity;
 	
 	/**
-	 * Find musical genre by name
-	 * 
-	 * Refresh all the entries in the cache to load new ones
+	 * {@inheritDoc}
 	 */
 	@Override
 	@Cacheable(value = MusicalGenreConstants.CACHE_NAME, key = "#root.method", unless = "#result == null")
 	public Optional<MusicalGenreResource> findByName(final String name) throws NotFoundEntityException {
 		return super.findByName(name);
 	}
-
-
+	
 	/**
 	 * Find all musical genres
 	 * 
@@ -56,7 +55,7 @@ public class MusicalGenreService extends BaseAdminService<MusicalGenre, MusicalG
 	public List<MusicalGenreResource> findAll() {
 		return super.findAll();
 	}
-
+	
 	/**
 	 * {@inheritDoc}
 	 */

@@ -12,6 +12,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
@@ -35,12 +37,16 @@ public class MusicalGenreServiceTest {
 
 	MusicalGenreResource domain;
 	
+	Example<MusicalGenreResource> example;
+	
 	@Before
 	public void setUp() {
 		String name = "Pop punk";
 		String description = "Pop punk (also known as punk-pop) is a music genre that fuses elements of pop music with punk rock. Fast tempos, loud electric guitar distortion, and power chord changes are typically played under pop-influenced melodies, vocal styles with lighthearted lyrical themes including boredom and teenage romance.";
 
 		domain = MusicalGenreResource.musicalGenreResourceBuilder().name(name).description(description).build();
+		
+		example = Example.of(domain, ExampleMatcher.matchingAll());
 	}
 
 	@Test
@@ -57,6 +63,13 @@ public class MusicalGenreServiceTest {
 	public void testFindAllMusicalGenres() {
 		Iterable<MusicalGenreResource> musicalGenres = musicalGenreService.findAll();
 		Assert.assertNotNull(musicalGenres);
+	}
+	
+	// @see https://www.logicbig.com/tutorials/spring-framework/spring-data/query-example-matchers.html
+	@Test
+	public void testFindOneByExampleMusicalGenre() {
+		Optional<MusicalGenreResource> optResource = musicalGenreService.findByExample(example);
+		Assert.assertNotNull(optResource.get());
 	}
 	
 	@Test
