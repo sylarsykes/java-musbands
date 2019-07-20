@@ -45,7 +45,7 @@ public class MusicalGenreControllerTest {
 	MusicalGenreResource domain;
 	
 	MusicalGenreResource domainForUdpate;
-
+	
 	@Before
 	public void setUp() {
 		mockMvc = MockMvcBuilders.standaloneSetup(musicalGenreController).build();
@@ -56,7 +56,6 @@ public class MusicalGenreControllerTest {
 		domain = MusicalGenreResource.musicalGenreResourceBuilder().name(name).description(description).build();
 		
 		domainForUdpate = MusicalGenreResource.musicalGenreResourceBuilder().entityId(3).name(name).description(description + " erop").build();
-
 	}
 
 	public static String asJsonString(final Object obj) {
@@ -84,6 +83,16 @@ public class MusicalGenreControllerTest {
 	}
 
 	@Test
+	public void testFindById() throws Exception {
+		// call GET /admin/musicalGenres/{id} application/json
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/admin/musicalGenres/{id}", 1);
+		
+		MvcResult result = mockMvc.perform(requestBuilder).andExpect(status().isOk()).andDo(print()).andReturn();
+		
+		assertNotNull("Empty value", result.getResponse());
+	}
+	
+	@Test
 	public void testFindByName() throws Exception {
 		// call GET /admin/musicalGenres/name/{name} application/json
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/admin/musicalGenres/name/{name}", "Pop punk");
@@ -94,11 +103,25 @@ public class MusicalGenreControllerTest {
 	}
 
 	@Test
-	public void testFindById() throws Exception {
-		// call GET /admin/musicalGenres/{id} application/json
-		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/admin/musicalGenres/{id}", 1);
+	public void testFindByExample() throws Exception {
 
-		MvcResult result = mockMvc.perform(requestBuilder).andExpect(status().isOk()).andDo(print()).andReturn();
+		// call GET /admin/musicalGenres/name/{name} application/json
+		MockHttpServletRequestBuilder postBuilder = MockMvcRequestBuilders.post("/admin/musicalGenres/find/example")
+				.contentType(MediaType.APPLICATION_JSON_VALUE).content(asJsonString(domain));
+
+		MvcResult result = mockMvc.perform(postBuilder).andExpect(status().isOk()).andDo(print()).andReturn();
+
+		assertNotNull("Empty value", result.getResponse());
+	}
+	
+	@Test
+	public void testFindAllByExample() throws Exception {
+
+		// call GET /admin/musicalGenres/name/{name} application/json
+		MockHttpServletRequestBuilder postBuilder = MockMvcRequestBuilders.post("/admin/musicalGenres/findAll/example")
+				.contentType(MediaType.APPLICATION_JSON_VALUE).content(asJsonString(domain));
+
+		MvcResult result = mockMvc.perform(postBuilder).andExpect(status().isOk()).andDo(print()).andReturn();
 
 		assertNotNull("Empty value", result.getResponse());
 	}

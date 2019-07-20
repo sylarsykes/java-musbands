@@ -12,10 +12,12 @@ public final class MusicalGenreConstants {
 	public static final String CACHE_MANGER_BEAN_NAME = "musicalGenreCacheManager";
 
 	// CONTROLLER //
-	public static final String CONTROLLER_NAME = "musicalGenreCacheManager";
+	public static final String CONTROLLER_NAME = "musicalGenreController";
 	public static final String CONTROLLER_REQUEST_MAPPING = "/admin/musicalGenres";
 	public static final String CONTROLLER_GET_FIND_BY_NAME_MAPPING = "/name/{name}";
 	public static final String CONTROLLER_GET_FIND_BY_ID = "/{id}";
+	public static final String CONTROLLER_GET_FIND_BY_EXAMPLE = "/find/example";
+	public static final String CONTROLLER_GET_FIND_ALL_BY_EXAMPLE = "/findAll/example";
 	public static final String CONTROLLER_PUT_UPDATE = "/{id}";
 	public static final String CONTROLLER_DELETE_DELETE = "/{id}";
 

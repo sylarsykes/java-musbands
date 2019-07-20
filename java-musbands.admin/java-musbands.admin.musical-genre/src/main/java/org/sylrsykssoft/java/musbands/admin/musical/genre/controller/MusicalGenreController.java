@@ -7,6 +7,8 @@ import javax.validation.Valid;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -45,26 +47,26 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 
 	@Autowired
 	private MusicalGenreService musicalGenreService;
-	
+
 	/**
-	 * Get all musical genres
+	 * Find one entry.
 	 * 
-	 * @return
+	 * @param id
+	 *            Id
+	 * 
+	 * @return T entry.
+	 * 
 	 * @throws NotFoundEntityException
 	 */
-	@Override
-	@GetMapping
-	public @ResponseBody List<MusicalGenreResource> findAll() throws NotFoundEntityException {
-		LOGGER.info("MusicalGenreController::findAll");
+	@GetMapping(path = MusicalGenreConstants.CONTROLLER_GET_FIND_BY_ID, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody MusicalGenreResource findById(@PathVariable final Integer id) throws NotFoundEntityException {
+		LOGGER.info("MusicalGenreController::findOne Finding a entry with id: {}", id);
 		
-		final List<MusicalGenreResource> result = musicalGenreService.findAll();
-		if (result == null) {
-			throw new NotFoundEntityException();
-		}
+		final Optional<MusicalGenreResource> result = musicalGenreService.findById(id);
 		
-		LOGGER.info("MusicalGenreController::findAll Result -> {}", result);
-
-		return result;
+		LOGGER.info("MusicalGenreController::findOne Result -> {}", result.get());
+		
+		return result.get();
 	}
 	
 	/**
@@ -89,26 +91,72 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	}
 
 	/**
-	 * Find one entry.
+	 * Find by example
 	 * 
-	 * @param id
-	 *            Id
+	 * @param resource
+	 *            Entity to find.
 	 * 
-	 * @return T entry.
+	 * @return T entity.
 	 * 
 	 * @throws NotFoundEntityException
 	 */
-	@GetMapping(path = MusicalGenreConstants.CONTROLLER_GET_FIND_BY_ID, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody MusicalGenreResource findOne(@PathVariable final Integer id) throws NotFoundEntityException {
-		LOGGER.info("MusicalGenreController::findOne Finding a entry with id: {}", id);
+	@PostMapping(path = MusicalGenreConstants.CONTROLLER_GET_FIND_BY_EXAMPLE, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody MusicalGenreResource findOneByExample(@Valid @RequestBody final MusicalGenreResource resource) {
+		LOGGER.info("MusicalGenreController::findOne Finding a entry with id: {}", resource);
 		
-		final Optional<MusicalGenreResource> result = musicalGenreService.findById(id);
+		Example<MusicalGenreResource> example = Example.of(resource, ExampleMatcher.matchingAll());
+		
+		final Optional<MusicalGenreResource> result = musicalGenreService.findByExample(example);
 		
 		LOGGER.info("MusicalGenreController::findOne Result -> {}", result.get());
 		
 		return result.get();
 	}
 
+	/**
+	 * Get all musical genres
+	 * 
+	 * @return
+	 * @throws NotFoundEntityException
+	 */
+	@Override
+	@GetMapping
+	public @ResponseBody List<MusicalGenreResource> findAll() throws NotFoundEntityException {
+		LOGGER.info("MusicalGenreController::findAll");
+		
+		final List<MusicalGenreResource> result = musicalGenreService.findAll();
+		if (result == null) {
+			throw new NotFoundEntityException();
+		}
+		
+		LOGGER.info("MusicalGenreController::findAll Result -> {}", result);
+
+		return result;
+	}
+	
+	/**
+	 * Find all entries by example.
+	 * 
+	 * @return Iterable<T> entries.
+	 * 
+	 * @throws NotFoundEntityException
+	 */
+	@PostMapping(path = MusicalGenreConstants.CONTROLLER_GET_FIND_ALL_BY_EXAMPLE, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody List<MusicalGenreResource> findAllByExample(@RequestBody final MusicalGenreResource resource) throws NotFoundEntityException {
+		LOGGER.info("BaseAdminController:findAll Finding all entries");
+
+		final Example<MusicalGenreResource> example = Example.of(resource, ExampleMatcher.matchingAll());
+		
+		final List<MusicalGenreResource> entities = musicalGenreService.findAllByExample(example);
+		if (entities == null) {
+			throw new NotFoundEntityException();
+		}
+
+		LOGGER.info("BaseAdminController:findAll Found {} entries.", entities);
+
+		return entities;
+	}
+	
 	/**
 	 * Create entry.
 	 * 
