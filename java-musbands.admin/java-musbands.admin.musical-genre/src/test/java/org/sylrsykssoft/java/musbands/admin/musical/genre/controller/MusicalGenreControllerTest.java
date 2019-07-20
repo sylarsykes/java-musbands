@@ -125,6 +125,17 @@ public class MusicalGenreControllerTest {
 
 		assertNotNull("Empty value", result.getResponse());
 	}
+	
+	@Test
+	public void testFindAllByExampleSortable() throws Exception {
+		// call GET /admin/musicalGenres/findAll/example/sort application/json
+		MockHttpServletRequestBuilder postBuilder = MockMvcRequestBuilders.post("/admin/musicalGenres/findAll/example/sort")
+				.contentType(MediaType.APPLICATION_JSON_VALUE).content(asJsonString(domain)).param("direction", "asc").param("properties", "name", "description");
+
+		MvcResult result = mockMvc.perform(postBuilder).andExpect(status().isOk()).andDo(print()).andReturn();
+
+		assertNotNull("Empty value", result.getResponse());
+	}
 
 	@Test
 	public void testCreateMusicalGenre() throws Exception {

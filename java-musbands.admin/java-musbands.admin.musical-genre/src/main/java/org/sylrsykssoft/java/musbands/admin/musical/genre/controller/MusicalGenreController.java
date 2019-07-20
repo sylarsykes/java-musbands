@@ -9,6 +9,8 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,8 +54,9 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	/**
 	 * Find one entry.
 	 * 
-	 * @param id
-	 *            Id
+	 * @param id Id
+	 * 
+	 * @example /admin/musicalGenres/{id}]
 	 * 
 	 * @return T entry.
 	 * 
@@ -72,8 +76,9 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	/**
 	 * Find by name.
 	 * 
-	 * @param name
-	 *            Value of attribute name.
+	 * @param name Value of attribute name.
+	 * 
+	 * @example /admin/musicalGenres/name/{name}]
 	 * 
 	 * @return T entity.
 	 * 
@@ -93,8 +98,9 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	/**
 	 * Find by example
 	 * 
-	 * @param resource
-	 *            Entity to find.
+	 * @param resource Entity to find.
+	 * 
+	 * @example /admin/musicalGenres/find/example
 	 * 
 	 * @return T entity.
 	 * 
@@ -102,13 +108,13 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	 */
 	@PostMapping(path = MusicalGenreConstants.CONTROLLER_GET_FIND_BY_EXAMPLE, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody MusicalGenreResource findOneByExample(@Valid @RequestBody final MusicalGenreResource resource) {
-		LOGGER.info("MusicalGenreController::findOne Finding a entry with id: {}", resource);
+		LOGGER.info("MusicalGenreController::findOneByExample Finding a entry with example: {}", resource);
 		
 		Example<MusicalGenreResource> example = Example.of(resource, ExampleMatcher.matchingAll());
 		
 		final Optional<MusicalGenreResource> result = musicalGenreService.findByExample(example);
 		
-		LOGGER.info("MusicalGenreController::findOne Result -> {}", result.get());
+		LOGGER.info("MusicalGenreController::findOneByExample Result -> {}", result.get());
 		
 		return result.get();
 	}
@@ -116,7 +122,10 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	/**
 	 * Get all musical genres
 	 * 
-	 * @return
+	 * @example /admin/musicalGenres
+	 * 
+	 * @return List<MusicalGenreResource> List of entries
+	 * 
 	 * @throws NotFoundEntityException
 	 */
 	@Override
@@ -137,13 +146,17 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	/**
 	 * Find all entries by example.
 	 * 
-	 * @return Iterable<T> entries.
+	 * @param resource MusicalGenreResource object.
+	 * 
+	 * @example /admin/musicalGenres/findAll/example
+	 * 
+	 * @return List<MusicalGenreResource> List of entries.
 	 * 
 	 * @throws NotFoundEntityException
 	 */
 	@PostMapping(path = MusicalGenreConstants.CONTROLLER_GET_FIND_ALL_BY_EXAMPLE, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody List<MusicalGenreResource> findAllByExample(@RequestBody final MusicalGenreResource resource) throws NotFoundEntityException {
-		LOGGER.info("BaseAdminController:findAll Finding all entries");
+		LOGGER.info("MusicalGenreController:findAllByExample Finding all entries {}", resource);
 
 		final Example<MusicalGenreResource> example = Example.of(resource, ExampleMatcher.matchingAll());
 		
@@ -152,7 +165,40 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 			throw new NotFoundEntityException();
 		}
 
-		LOGGER.info("BaseAdminController:findAll Found {} entries.", entities);
+		LOGGER.info("MusicalGenreController:findAllByExample Found {} entries.", entities);
+
+		return entities;
+	}
+	
+	/**
+	 * Find all entries by example.
+	 * 
+	 * @param resource MusicalGenreResource object
+	 * @param direction Sorting direction values "asc" or "desc"
+	 * @param properties List of properties
+	 * 
+	 * @example /admin/musicalGenres/findAll/example/sort?direction="asc"&properties=["name", "description"]
+	 * 
+	 * @return List<MusicalGenreResource> entries.
+	 * 
+	 * @throws NotFoundEntityException
+	 */
+	@PostMapping(path = MusicalGenreConstants.CONTROLLER_GET_FIND_ALL_BY_EXAMPLE_SORTABLE, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody List<MusicalGenreResource> findAllByExampleSortable(final @RequestBody MusicalGenreResource resource, 
+			final @RequestParam String direction, final @RequestParam List<String> properties) throws NotFoundEntityException {
+		LOGGER.info("MusicalGenreController:findAllByExampleSortable Finding all entries with example {} with direction {} and properties {}", resource, direction, properties);
+
+		final Example<MusicalGenreResource> example = Example.of(resource, ExampleMatcher.matchingAll());
+		
+		final Direction sortDirection = Direction.fromString(direction);
+		final Sort sort = new Sort(sortDirection, properties);
+		
+		final List<MusicalGenreResource> entities = musicalGenreService.findAllByExampleSortable(example, sort);
+		if (entities == null) {
+			throw new NotFoundEntityException();
+		}
+
+		LOGGER.info("MusicalGenreController:findAllByExampleSortable Found {} entries.", entities);
 
 		return entities;
 	}
@@ -160,8 +206,7 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	/**
 	 * Create entry.
 	 * 
-	 * @param entity
-	 *            Entity.
+	 * @param entity Entity.
 	 * 
 	 * @return T entity.
 	 */
@@ -169,11 +214,11 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
 	public @ResponseBody MusicalGenreResource create(@Valid @RequestBody final MusicalGenreResource entity) {
-		LOGGER.info("MusicalGenreController::update Creating a entry: {}", entity);
+		LOGGER.info("MusicalGenreController::create Creating a entry: {}", entity);
 		
 		final MusicalGenreResource result = musicalGenreService.save(entity);
 		
-		LOGGER.info("MusicalGenreController::update Result -> {}", result);
+		LOGGER.info("MusicalGenreController::create Result -> {}", result);
 		
 		return result;
 	}
@@ -181,10 +226,8 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	/**
 	 * Update entity.
 	 * 
-	 * @param entity
-	 *            Entity.
-	 * @param id
-	 *            Id.
+	 * @param entity Entity.
+	 * @param id Id.
 	 * 
 	 * @return T entity.
 	 * 
@@ -194,7 +237,8 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	@Override
 	@PutMapping(path = MusicalGenreConstants.CONTROLLER_PUT_UPDATE, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody MusicalGenreResource update(@Valid @RequestBody final MusicalGenreResource entity, final @PathVariable Integer id) throws NotIdMismatchEntityException, NotFoundEntityException {
+	public @ResponseBody MusicalGenreResource update(@Valid @RequestBody final MusicalGenreResource entity, 
+			final @PathVariable Integer id) throws NotIdMismatchEntityException, NotFoundEntityException {
 		LOGGER.info("MusicalGenreController::update Updating a entry with id: {}", id);
 		
 		if (ObjectUtils.notEqual(entity.getEntityId(), id)) {
@@ -211,8 +255,7 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	/**
 	 * Delete entry.
 	 * 
-	 * @param id
-	 *            Id.
+	 * @param id Id.
 	 * 
 	 * @throws NotFoundEntityException
 	 * @throws AppException

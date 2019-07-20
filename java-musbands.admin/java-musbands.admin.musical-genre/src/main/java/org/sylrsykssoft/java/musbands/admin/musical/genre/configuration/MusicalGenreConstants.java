@@ -18,6 +18,7 @@ public final class MusicalGenreConstants {
 	public static final String CONTROLLER_GET_FIND_BY_ID = "/{id}";
 	public static final String CONTROLLER_GET_FIND_BY_EXAMPLE = "/find/example";
 	public static final String CONTROLLER_GET_FIND_ALL_BY_EXAMPLE = "/findAll/example";
+	public static final String CONTROLLER_GET_FIND_ALL_BY_EXAMPLE_SORTABLE = "/findAll/example/sort";
 	public static final String CONTROLLER_PUT_UPDATE = "/{id}";
 	public static final String CONTROLLER_DELETE_DELETE = "/{id}";
 
