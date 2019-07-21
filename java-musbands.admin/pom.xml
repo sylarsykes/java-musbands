@@ -55,5 +55,7 @@
   <modules>
     <module>java-musbands.admin.library</module>
    	<module>java-musbands.admin.musical-genre</module>
+    <module>java-musbands.admin.function</module>
+    <module>java-musbands.admin.function-member</module>
   </modules>
 </project>
