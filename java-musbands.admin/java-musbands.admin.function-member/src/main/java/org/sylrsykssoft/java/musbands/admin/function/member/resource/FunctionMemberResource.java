@@ -27,7 +27,7 @@ import lombok.Singular;
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @Setter
 @Getter
-@EqualsAndHashCode(callSuper = false, doNotUseGetters = true)
+@EqualsAndHashCode(callSuper = true, doNotUseGetters = true)
 public class FunctionMemberResource extends BaseAdminResource {
 
 	private @Singular Set<FunctionMemberSynonymicResource> synonyms;
