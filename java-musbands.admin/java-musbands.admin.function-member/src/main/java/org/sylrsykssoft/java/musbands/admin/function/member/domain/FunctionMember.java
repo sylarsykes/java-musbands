@@ -39,7 +39,8 @@ import lombok.Singular;
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @Setter
 @Getter
-@EqualsAndHashCode(callSuper = true, doNotUseGetters = true)
+@EqualsAndHashCode(callSuper = true, doNotUseGetters = true, exclude = "synonyms")
+//@ToString(callSuper = true)
 @EntityListeners({BaseListener.class})
 public class FunctionMember extends BaseAdmin {
 	

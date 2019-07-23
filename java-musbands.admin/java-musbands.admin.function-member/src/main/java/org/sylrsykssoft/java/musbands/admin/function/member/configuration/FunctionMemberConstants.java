@@ -14,9 +14,9 @@ public final class FunctionMemberConstants {
 	// CONTROLLER //
 	public static final String CONTROLLER_NAME = "functionMemberController";
 	public static final String CONTROLLER_REQUEST_MAPPING = "/admin/functionMembers";
-	public static final String CONTROLLER_GET_FIND_BY_NAME_MAPPING = "/name/{name}";
-	public static final String CONTROLLER_GET_FIND_BY_ID = "/{id}";
-	public static final String CONTROLLER_GET_FIND_BY_EXAMPLE = "/find/example";
+	public static final String CONTROLLER_GET_FIND_BY_ID = "/findOne/id/{id}";
+	public static final String CONTROLLER_GET_FIND_BY_NAME_MAPPING = "/findOne/name/{name}";
+	public static final String CONTROLLER_GET_FIND_BY_EXAMPLE = "/findOne/example";
 	public static final String CONTROLLER_GET_FIND_ALL_BY_EXAMPLE = "/findAll/example";
 	public static final String CONTROLLER_GET_FIND_ALL_BY_EXAMPLE_SORTABLE = "/findAll/example/sort";
 	public static final String CONTROLLER_PUT_UPDATE = "/{id}";

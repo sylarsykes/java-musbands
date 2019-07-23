@@ -20,6 +20,7 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.sylrsykssoft.java.musbands.admin.function.member.FunctionMemberApplication;
+import org.sylrsykssoft.java.musbands.admin.function.member.configuration.FunctionMemberConstants;
 import org.sylrsykssoft.java.musbands.admin.function.member.resource.FunctionMemberResource;
 import org.sylrsykssoft.java.musbands.admin.library.configuration.MusbandsAdminLibraryConfiguration;
 
@@ -73,7 +74,7 @@ public class FunctionMemberControllerTest {
 //		when(FunctionMemberService.findAll()).thenReturn(Arrays.asList(new FunctionMemberResource()));
 
 		// call GET /admin/functionMembers application/json
-		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/admin/functionMembers")
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.get(FunctionMemberConstants.CONTROLLER_REQUEST_MAPPING)
 				.accept(MediaType.APPLICATION_JSON_VALUE);
 
 		MvcResult result = mockMvc.perform(requestBuilder).andExpect(status().isOk()).andDo(print()).andReturn();
@@ -84,7 +85,7 @@ public class FunctionMemberControllerTest {
 	@Test
 	public void testFindById() throws Exception {
 		// call GET /admin/functionMembers/{id} application/json
-		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/admin/functionMembers/{id}", 1);
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.get(FunctionMemberConstants.CONTROLLER_REQUEST_MAPPING + FunctionMemberConstants.CONTROLLER_GET_FIND_BY_ID, 1);
 		
 		MvcResult result = mockMvc.perform(requestBuilder).andExpect(status().isOk()).andDo(print()).andReturn();
 		
@@ -94,7 +95,7 @@ public class FunctionMemberControllerTest {
 	@Test
 	public void testFindByName() throws Exception {
 		// call GET /admin/FunctionMembers/name/{name} application/json
-		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/admin/functionMembers/name/{name}", "Lead guitar");
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.get(FunctionMemberConstants.CONTROLLER_REQUEST_MAPPING + FunctionMemberConstants.CONTROLLER_GET_FIND_BY_NAME_MAPPING, "Lead guitar");
 
 		MvcResult result = mockMvc.perform(requestBuilder).andExpect(status().isOk()).andDo(print()).andReturn();
 
@@ -105,7 +106,7 @@ public class FunctionMemberControllerTest {
 	public void testFindByExample() throws Exception {
 
 		// call GET /admin/functionMembers/name/{name} application/json
-		MockHttpServletRequestBuilder postBuilder = MockMvcRequestBuilders.post("/admin/functionMembers/find/example")
+		MockHttpServletRequestBuilder postBuilder = MockMvcRequestBuilders.post(FunctionMemberConstants.CONTROLLER_REQUEST_MAPPING + FunctionMemberConstants.CONTROLLER_GET_FIND_BY_EXAMPLE)
 				.contentType(MediaType.APPLICATION_JSON_VALUE).content(asJsonString(domain));
 
 		MvcResult result = mockMvc.perform(postBuilder).andExpect(status().isOk()).andDo(print()).andReturn();
@@ -117,7 +118,7 @@ public class FunctionMemberControllerTest {
 	public void testFindAllByExample() throws Exception {
 
 		// call GET /admin/functionMembers/name/{name} application/json
-		MockHttpServletRequestBuilder postBuilder = MockMvcRequestBuilders.post("/admin/functionMembers/findAll/example")
+		MockHttpServletRequestBuilder postBuilder = MockMvcRequestBuilders.post(FunctionMemberConstants.CONTROLLER_REQUEST_MAPPING + FunctionMemberConstants.CONTROLLER_GET_FIND_ALL_BY_EXAMPLE)
 				.contentType(MediaType.APPLICATION_JSON_VALUE).content(asJsonString(domain));
 
 		MvcResult result = mockMvc.perform(postBuilder).andExpect(status().isOk()).andDo(print()).andReturn();
@@ -128,7 +129,7 @@ public class FunctionMemberControllerTest {
 	@Test
 	public void testFindAllByExampleSortable() throws Exception {
 		// call GET /admin/functionMembers/findAll/example/sort application/json
-		MockHttpServletRequestBuilder postBuilder = MockMvcRequestBuilders.post("/admin/functionMembers/findAll/example/sort")
+		MockHttpServletRequestBuilder postBuilder = MockMvcRequestBuilders.post(FunctionMemberConstants.CONTROLLER_REQUEST_MAPPING + FunctionMemberConstants.CONTROLLER_GET_FIND_ALL_BY_EXAMPLE_SORTABLE)
 				.contentType(MediaType.APPLICATION_JSON_VALUE).content(asJsonString(domain)).param("direction", "asc").param("properties", "name", "description");
 
 		MvcResult result = mockMvc.perform(postBuilder).andExpect(status().isOk()).andDo(print()).andReturn();
@@ -139,13 +140,13 @@ public class FunctionMemberControllerTest {
 	@Test
 	public void testCreateFunctionMember() throws Exception {
 		// call POST /admin/functionMembers/ application/json
-		MockHttpServletRequestBuilder postBuilder = MockMvcRequestBuilders.post("/admin/functionMembers")
+		MockHttpServletRequestBuilder postBuilder = MockMvcRequestBuilders.post(FunctionMemberConstants.CONTROLLER_REQUEST_MAPPING)
 				.contentType(MediaType.APPLICATION_JSON_VALUE).content(asJsonString(domain));
 
         this.mockMvc.perform(postBuilder).andExpect(status().isCreated());
         
 		// call GET /admin/functionMembers/name/{name} application/json
-		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/admin/functionMembers/name/{name}", "Lead guitar");
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.get(FunctionMemberConstants.CONTROLLER_REQUEST_MAPPING + FunctionMemberConstants.CONTROLLER_GET_FIND_BY_NAME_MAPPING, "Lead guitar");
 
 		MvcResult result = mockMvc.perform(requestBuilder).andExpect(status().isOk()).andDo(print()).andReturn();
 
@@ -155,13 +156,13 @@ public class FunctionMemberControllerTest {
 	@Test
 	public void testUpdateFunctionMember() throws Exception {
 		// call PUT /admin/functionMembers/ application/json
-		MockHttpServletRequestBuilder putBuilder = MockMvcRequestBuilders.put("/admin/functionMembers/{id}", 2)
+		MockHttpServletRequestBuilder putBuilder = MockMvcRequestBuilders.put(FunctionMemberConstants.CONTROLLER_REQUEST_MAPPING + FunctionMemberConstants.CONTROLLER_GET_FIND_BY_ID, 2)
 				.contentType(MediaType.APPLICATION_JSON_VALUE).content(asJsonString(domainForUdpate));
 		
 		this.mockMvc.perform(putBuilder).andExpect(status().isOk());
 		
 		// call GET /admin/functionMembers/name/{name} application/json
-		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/admin/functionMembers/name/{name}", "Lead guitar");
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.get(FunctionMemberConstants.CONTROLLER_REQUEST_MAPPING + FunctionMemberConstants.CONTROLLER_GET_FIND_BY_NAME_MAPPING, "Lead guitar");
 		
 		MvcResult result = mockMvc.perform(requestBuilder).andExpect(status().isOk()).andDo(print()).andReturn();
 		
@@ -171,12 +172,12 @@ public class FunctionMemberControllerTest {
 	@Test
 	public void testDeleteFunctionMember() throws Exception {
 		// call DELETE /admin/functionMembers/ application/json
-		MockHttpServletRequestBuilder deleteBuilder = MockMvcRequestBuilders.delete("/admin/functionMembers/{id}", 2);
+		MockHttpServletRequestBuilder deleteBuilder = MockMvcRequestBuilders.delete(FunctionMemberConstants.CONTROLLER_REQUEST_MAPPING + FunctionMemberConstants.CONTROLLER_GET_FIND_BY_ID, 2);
 		
 		this.mockMvc.perform(deleteBuilder).andExpect(status().isOk());
 		
 		// call GET /admin/functionMembers/name/{name} application/json
-		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/admin/functionMembers/name/{name}", "Lead guitar");
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.get(FunctionMemberConstants.CONTROLLER_REQUEST_MAPPING + FunctionMemberConstants.CONTROLLER_GET_FIND_BY_NAME_MAPPING, "Lead guitar");
 		
 		MvcResult result = mockMvc.perform(requestBuilder).andExpect(status().isNotFound()).andDo(print()).andReturn();
 		
