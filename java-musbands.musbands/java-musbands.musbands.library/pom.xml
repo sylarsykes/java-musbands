@@ -5,15 +5,15 @@
   
   <parent>
     <groupId>org.sylrsykssoft</groupId>
-    <artifactId>java-musbands.admin</artifactId>
+    <artifactId>java-musbands.musbands</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <relativePath>../</relativePath>
   </parent>
   
-  <artifactId>java-musbands.admin.library</artifactId>
-  <name>java-musbands.admin.library</name>
-  <description>Musbands Admin Core Rest API</description>
-  <url>https://github.com/sylarsykes/java-musbands/tree/develop/java-musbands.admin.library</url>
+  <artifactId>java-musbands.musbands.library</artifactId>
+  <name>java-musbands.musbands.library</name>
+  <description>Musbands Core Rest API</description>
+  <url>https://github.com/sylarsykes/java-musbands/tree/develop/java-musbands.musbands.library</url>
 
   <properties>
     <main.basedir>${basedir}/../../</main.basedir>

@@ -9,20 +9,19 @@
     <relativePath>../</relativePath>
   </parent>
   
-  <artifactId>java-musbands.admin</artifactId>
+  <artifactId>java-musbands.musbands</artifactId>
   <packaging>pom</packaging>
-  <name>java-musbands.admin</name>
-  <description>Musbands Admin Rest API</description>
-  <url>https://github.com/sylarsykes/java-musbands/tree/develop/java-musbands.admin</url>
+  <name>java-musbands.musbands</name>
+  <description>Musbands Rest API</description>
+  <url>https://github.com/sylarsykes/java-musbands/tree/develop/java-musbands.musbands</url>
   
   <properties>
     <main.basedir>${basedir}/../</main.basedir>
     
-    <!-- Musbands Admin Dependencies -->
-    <java-musbands.admin.version>${project.version}</java-musbands.admin.version>
-    <java-musbands.admin.library.version>${project.version}</java-musbands.admin.library.version>
-    <java-musbands.admin.musical-genre.version>${project.version}</java-musbands.admin.musical-genre.version>
-    <java-musbands.admin.function-member.version>${project.version}</java-musbands.admin.function-member.version>
+    <!-- Musbands Dependencies -->
+    <java-musbands.musbands.version>${project.version}</java-musbands.musbands.version>
+    <java-musbands.musbands.library.version>${project.version}</java-musbands.musbands.library.version>
+    <java-musbands.musbands.discographic.version>${project.version}</java-musbands.musbands.discographic.version>
   </properties>
   
   <dependencies>
@@ -46,17 +45,10 @@
    		<artifactId>mariadb-java-client</artifactId>
 	</dependency>
 	
-	<dependency>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-cache</artifactId>
-	</dependency>
-
   </dependencies>
   
   <modules>
-    <module>java-musbands.admin.library</module>
-   	<module>java-musbands.admin.musical-genre</module>
-    <module>java-musbands.admin.function</module>
-    <module>java-musbands.admin.function-member</module>
+    <module>java-musbands.musbands.library</module>
+    <module>java-musbands.musbands.discographic</module>
   </modules>
 </project>
