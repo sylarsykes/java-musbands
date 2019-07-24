@@ -3,29 +3,38 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   
-  <parent>
+    <parent>
     <groupId>org.sylrsykssoft</groupId>
     <artifactId>java-musbands.admin</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <relativePath>../</relativePath>
   </parent>
 
-  <artifactId>java-musbands.admin.function-member</artifactId>
+  <artifactId>java-musbands.admin.application</artifactId>
   <packaging>jar</packaging>
-  <name>java-musbands.admin.function-member</name>
-  <description>Musbands Admin Function Member Rest API</description>
-  <url>https://github.com/sylarsykes/java-musbands/tree/develop/java-musbands.admin.function-member</url>
+  <name>java-musbands.admin.application</name>
+  <description>Musbands Admin Spring Boot Aplication</description>
+  <url>https://github.com/sylarsykes/java-musbands/tree/develop/java-musbands.admin.application</url>
 
   <properties>
     <main.basedir>${basedir}/../../</main.basedir>
+    
+    <start-class>org.sylrsykssoft.java.musbands.admin.application.MusbandsAdminApplication</start-class>
   </properties>
 
   <dependencies>
+  
   	<dependency>
 		<groupId>org.sylrsykssoft</groupId>
-		<artifactId>java-musbands.admin.library</artifactId>
-		<version>${java-musbands.admin.library.version}</version>
+		<artifactId>java-musbands.admin.musical-genre</artifactId>
+		<version>${java-musbands.admin.musical-genre.version}</version>
 	</dependency>
+  	<dependency>
+		<groupId>org.sylrsykssoft</groupId>
+		<artifactId>java-musbands.admin.function-member</artifactId>
+		<version>${java-musbands.admin.function-member.version}</version>
+	</dependency>
+	
   </dependencies>
   
   <build>
@@ -34,9 +43,6 @@
 		<plugin>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-maven-plugin</artifactId>
-			<configuration>
-            	<skip>true</skip>
-        	</configuration>
 		</plugin>
 		
 	    <plugin>

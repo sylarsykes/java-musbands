@@ -9,8 +9,6 @@ import org.sylrsykssoft.java.musbands.admin.function.member.domain.FunctionMembe
 import org.sylrsykssoft.java.musbands.admin.function.member.resource.FunctionMemberResource;
 import org.sylrsykssoft.java.musbands.admin.function.member.service.FunctionMemberService;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * Rest Controller for Function Member API
  * 
@@ -21,7 +19,6 @@ import lombok.extern.slf4j.Slf4j;
  */
 @RestController(FunctionMemberConstants.CONTROLLER_NAME)
 @RequestMapping(FunctionMemberConstants.CONTROLLER_REQUEST_MAPPING)
-@Slf4j
 public class FunctionMemberController extends BaseAdminController<FunctionMemberResource, FunctionMember> {
 
 	@Autowired
@@ -33,7 +30,6 @@ public class FunctionMemberController extends BaseAdminController<FunctionMember
 	 * 
 	 * @return BaseAdminService<T, R>
 	 */
-	@Override
 	public FunctionMemberService getAdminService() {
 		return functionMemberService;
 	}

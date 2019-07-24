@@ -19,15 +19,6 @@ import org.sylrsykssoft.java.musbands.admin.function.member.resource.FunctionMem
 public class FunctionMemberMapperConfiguration {
 
 	/**
-	 * Model mapper bean
-	 * @return
-	 */
-	@Bean
-	public ModelMapper modelMapper() {
-	    return new ModelMapper();
-	}
-	
-	/**
 	 * FunctionMember mapper function.
 	 *
 	 * @return the model mapper function
