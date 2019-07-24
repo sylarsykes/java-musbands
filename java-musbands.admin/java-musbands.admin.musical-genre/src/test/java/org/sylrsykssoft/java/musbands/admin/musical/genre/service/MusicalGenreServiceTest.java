@@ -18,7 +18,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.sylrsykssoft.java.musbands.admin.library.configuration.MusbandsAdminLibraryConfiguration;
-import org.sylrsykssoft.java.musbands.admin.musical.genre.MusicalGenreApplication;
+import org.sylrsykssoft.java.musbands.admin.musical.genre.MusicalGenreApplicationTests;
 import org.sylrsykssoft.java.musbands.admin.musical.genre.resource.MusicalGenreResource;
 
 /**
@@ -28,7 +28,7 @@ import org.sylrsykssoft.java.musbands.admin.musical.genre.resource.MusicalGenreR
  *
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = { MusicalGenreApplication.class })
+@SpringBootTest(classes = { MusicalGenreApplicationTests.class })
 @ContextConfiguration(classes = { MusbandsAdminLibraryConfiguration.class, }, loader = AnnotationConfigContextLoader.class)
 public class MusicalGenreServiceTest {
 

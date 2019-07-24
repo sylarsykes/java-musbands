@@ -9,8 +9,6 @@ import org.sylrsykssoft.java.musbands.admin.musical.genre.domain.MusicalGenre;
 import org.sylrsykssoft.java.musbands.admin.musical.genre.resource.MusicalGenreResource;
 import org.sylrsykssoft.java.musbands.admin.musical.genre.service.MusicalGenreService;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * Rest Controller for Musical Genre API
  * 
@@ -21,7 +19,6 @@ import lombok.extern.slf4j.Slf4j;
  */
 @RestController(MusicalGenreConstants.CONTROLLER_NAME)
 @RequestMapping(MusicalGenreConstants.CONTROLLER_REQUEST_MAPPING)
-@Slf4j
 public class MusicalGenreController extends BaseAdminController<MusicalGenreResource, MusicalGenre> {
 
 	@Autowired
@@ -30,7 +27,6 @@ public class MusicalGenreController extends BaseAdminController<MusicalGenreReso
 	/**
 	 * {@inherit}
 	 */
-	@Override
 	public MusicalGenreService getAdminService() {
 		return musicalGenreService;
 	}

@@ -19,15 +19,6 @@ import org.sylrsykssoft.java.musbands.admin.musical.genre.resource.MusicalGenreR
 public class MusicalGenreMapperConfiguration {
 
 	/**
-	 * Model mapper bean
-	 * @return
-	 */
-	@Bean
-	public ModelMapper modelMapper() {
-	    return new ModelMapper();
-	}
-	
-	/**
 	 * MusicalGenre mapper function.
 	 *
 	 * @return the model mapper function

@@ -9,10 +9,12 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.sylrsykssoft.coreapi.framework.database.exception.NotFoundEntityException;
+import org.sylrsykssoft.coreapi.framework.database.repository.BaseAdminRepository;
 import org.sylrsykssoft.coreapi.framework.library.mapper.ModelMapperFunction;
 import org.sylrsykssoft.coreapi.framework.service.BaseAdminService;
 import org.sylrsykssoft.java.musbands.admin.musical.genre.configuration.MusicalGenreConstants;
 import org.sylrsykssoft.java.musbands.admin.musical.genre.domain.MusicalGenre;
+import org.sylrsykssoft.java.musbands.admin.musical.genre.repository.MusicalGenreRepository;
 import org.sylrsykssoft.java.musbands.admin.musical.genre.resource.MusicalGenreResource;
 
 /**
@@ -26,6 +28,9 @@ import org.sylrsykssoft.java.musbands.admin.musical.genre.resource.MusicalGenreR
 @CacheConfig(cacheNames = MusicalGenreConstants.CACHE_NAME, cacheManager = MusicalGenreConstants.CACHE_MANGER_BEAN_NAME)
 public class MusicalGenreService extends BaseAdminService<MusicalGenre, MusicalGenreResource> {
 
+	@Autowired
+	private MusicalGenreRepository musicalGenreRepository;
+	
 	/** Mapper resource bean */
 	@Autowired
 	@Qualifier(MusicalGenreConstants.MAPPER_RESOURCE_FUNCTION)
@@ -35,6 +40,13 @@ public class MusicalGenreService extends BaseAdminService<MusicalGenre, MusicalG
 	@Autowired
 	@Qualifier(MusicalGenreConstants.MAPPER_ENTITY_FUNCTION)
 	private ModelMapperFunction<MusicalGenreResource, MusicalGenre> musicalGenreMapperToEntity;
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public BaseAdminRepository<MusicalGenre> getAdminRepository() {
+		return musicalGenreRepository;
+	}
 	
 	/**
 	 * {@inheritDoc}

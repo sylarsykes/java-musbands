@@ -9,10 +9,12 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.sylrsykssoft.coreapi.framework.database.exception.NotFoundEntityException;
+import org.sylrsykssoft.coreapi.framework.database.repository.BaseAdminRepository;
 import org.sylrsykssoft.coreapi.framework.library.mapper.ModelMapperFunction;
 import org.sylrsykssoft.coreapi.framework.service.BaseAdminService;
 import org.sylrsykssoft.java.musbands.admin.function.member.configuration.FunctionMemberConstants;
 import org.sylrsykssoft.java.musbands.admin.function.member.domain.FunctionMember;
+import org.sylrsykssoft.java.musbands.admin.function.member.repository.FunctionMemberRepository;
 import org.sylrsykssoft.java.musbands.admin.function.member.resource.FunctionMemberResource;
 
 /**
@@ -26,6 +28,9 @@ import org.sylrsykssoft.java.musbands.admin.function.member.resource.FunctionMem
 @CacheConfig(cacheNames = FunctionMemberConstants.CACHE_NAME, cacheManager = FunctionMemberConstants.CACHE_MANGER_BEAN_NAME)
 public class FunctionMemberService extends BaseAdminService<FunctionMember, FunctionMemberResource> {
 
+	@Autowired
+	private FunctionMemberRepository functionMemberRepository;
+	
 	/** Mapper resource bean */
 	@Autowired
 	@Qualifier(FunctionMemberConstants.MAPPER_RESOURCE_FUNCTION)
@@ -35,6 +40,13 @@ public class FunctionMemberService extends BaseAdminService<FunctionMember, Func
 	@Autowired
 	@Qualifier(FunctionMemberConstants.MAPPER_ENTITY_FUNCTION)
 	private ModelMapperFunction<FunctionMemberResource, FunctionMember> functionMemberMapperToEntity;
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public BaseAdminRepository<FunctionMember> getAdminRepository() {
+		return functionMemberRepository;
+	}
 	
 	/**
 	 * {@inheritDoc}

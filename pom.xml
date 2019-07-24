@@ -9,9 +9,7 @@
 	</parent>
 	
 	<artifactId>java-musbands</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-		
 	<name>java-musbands</name>
 	<description>Demo project for Spring Boot</description>
 	<url>https://github.com/sylarsykes/java-musbands</url>
@@ -127,8 +125,6 @@
 
 	<modules>
     	<module>java-musbands.admin</module>
-    	<module>java-musbands.api</module>
-		<module>java-musbands.user</module>
-    <module>java-musbands.musbands</module>
+    	<module>java-musbands.musbands</module>
   </modules>
 </project>
