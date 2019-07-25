@@ -20,7 +20,6 @@
     
     <!-- Musbands Admin Dependencies -->
     <java-musbands.admin.version>${project.version}</java-musbands.admin.version>
-    <java-musbands.admin.library.version>${project.version}</java-musbands.admin.library.version>
     <java-musbands.admin.musical-genre.version>${project.version}</java-musbands.admin.musical-genre.version>
     <java-musbands.admin.function-member.version>${project.version}</java-musbands.admin.function-member.version>
     <java-musbands.admin.application.version>${project.version}</java-musbands.admin.application.version>
@@ -55,7 +54,6 @@
   </dependencies>
   
   <modules>
-    <module>java-musbands.admin.library</module>
    	<module>java-musbands.admin.musical-genre</module>
     <module>java-musbands.admin.function-member</module>
     <module>java-musbands.admin.application</module>

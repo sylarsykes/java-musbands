@@ -20,14 +20,6 @@
     <main.basedir>${basedir}/../../</main.basedir>
   </properties>
 
-  <dependencies>
-  	<dependency>
-		<groupId>org.sylrsykssoft</groupId>
-		<artifactId>java-musbands.admin.library</artifactId>
-		<version>${java-musbands.admin.library.version}</version>
-	</dependency>
-  </dependencies>
-  
   <build>
 	<plugins>
 		

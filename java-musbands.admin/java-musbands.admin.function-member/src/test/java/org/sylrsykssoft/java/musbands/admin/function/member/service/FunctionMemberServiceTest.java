@@ -20,9 +20,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.sylrsykssoft.java.musbands.admin.function.member.FunctionMemberApplicationTests;
+import org.sylrsykssoft.java.musbands.admin.function.member.configuration.FunctionMemberTestsConfiguration;
 import org.sylrsykssoft.java.musbands.admin.function.member.resource.FunctionMemberResource;
 import org.sylrsykssoft.java.musbands.admin.function.member.resource.FunctionMemberSynonymicResource;
-import org.sylrsykssoft.java.musbands.admin.library.configuration.MusbandsAdminLibraryConfiguration;
 
 /**
  * Function member service test.
@@ -32,7 +32,7 @@ import org.sylrsykssoft.java.musbands.admin.library.configuration.MusbandsAdminL
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = { FunctionMemberApplicationTests.class })
-@ContextConfiguration(classes = { MusbandsAdminLibraryConfiguration.class, }, loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = { FunctionMemberTestsConfiguration.class, }, loader = AnnotationConfigContextLoader.class)
 public class FunctionMemberServiceTest {
 
 	@Autowired

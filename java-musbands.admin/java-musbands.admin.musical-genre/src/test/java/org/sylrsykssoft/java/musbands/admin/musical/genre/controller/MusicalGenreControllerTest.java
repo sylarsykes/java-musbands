@@ -19,9 +19,9 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.sylrsykssoft.java.musbands.admin.library.configuration.MusbandsAdminLibraryConfiguration;
 import org.sylrsykssoft.java.musbands.admin.musical.genre.MusicalGenreApplicationTests;
 import org.sylrsykssoft.java.musbands.admin.musical.genre.configuration.MusicalGenreConstants;
+import org.sylrsykssoft.java.musbands.admin.musical.genre.configuration.MusicalGenreTestsConfiguration;
 import org.sylrsykssoft.java.musbands.admin.musical.genre.resource.MusicalGenreResource;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,8 +34,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = { MusicalGenreApplicationTests.class })
-@ContextConfiguration(classes = {
-		MusbandsAdminLibraryConfiguration.class, }, loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = { MusicalGenreTestsConfiguration.class, }, loader = AnnotationConfigContextLoader.class)
 public class MusicalGenreControllerTest {
 
 	private MockMvc mockMvc;

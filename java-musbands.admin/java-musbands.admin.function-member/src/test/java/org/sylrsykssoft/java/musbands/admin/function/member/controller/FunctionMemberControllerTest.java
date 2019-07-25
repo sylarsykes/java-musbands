@@ -21,8 +21,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.sylrsykssoft.java.musbands.admin.function.member.FunctionMemberApplicationTests;
 import org.sylrsykssoft.java.musbands.admin.function.member.configuration.FunctionMemberConstants;
+import org.sylrsykssoft.java.musbands.admin.function.member.configuration.FunctionMemberTestsConfiguration;
 import org.sylrsykssoft.java.musbands.admin.function.member.resource.FunctionMemberResource;
-import org.sylrsykssoft.java.musbands.admin.library.configuration.MusbandsAdminLibraryConfiguration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -34,8 +34,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = { FunctionMemberApplicationTests.class })
-@ContextConfiguration(classes = {
-		MusbandsAdminLibraryConfiguration.class, }, loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = { FunctionMemberTestsConfiguration.class, }, loader = AnnotationConfigContextLoader.class)
 public class FunctionMemberControllerTest {
 
 	private MockMvc mockMvc;
