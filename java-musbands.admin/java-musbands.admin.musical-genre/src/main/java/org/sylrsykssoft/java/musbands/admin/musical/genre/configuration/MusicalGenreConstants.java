@@ -9,7 +9,7 @@ package org.sylrsykssoft.java.musbands.admin.musical.genre.configuration;
 public final class MusicalGenreConstants {
 	// CACHE //
 	public static final String CACHE_NAME = "musicalGenres";
-	public static final String CACHE_MANGER_BEAN_NAME = "musicalGenreCacheManager";
+	public static final String CACHE_MANGER_BEAN_NAME = "musbandsAdminCacheManager";
 
 	// CONTROLLER //
 	public static final String CONTROLLER_NAME = "musicalGenreController";
@@ -29,6 +29,7 @@ public final class MusicalGenreConstants {
 	// REPOSITORY //
 	public static final String REPOSITORY_REST_COLLECTION_RESOURCE_REL = "musical_genre";
 	public static final String REPOSITORY_REST_RESOURCE_PATH = "musical_genre";
+	public static final String REPOSITORY_NAME = "musicalGenreRepository";
 	public static final String REPOSITORY_TABLE_NAME = "musical_genre";
 	public static final String REPOSITORY_ENTITY_NAME = "musical_genre";
 	

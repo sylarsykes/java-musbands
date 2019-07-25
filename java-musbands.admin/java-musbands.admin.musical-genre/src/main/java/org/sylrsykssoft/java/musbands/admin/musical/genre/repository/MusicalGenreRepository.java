@@ -11,7 +11,7 @@ import org.sylrsykssoft.coreapi.framework.database.repository.BaseAdminRepositor
 import org.sylrsykssoft.java.musbands.admin.musical.genre.configuration.MusicalGenreConstants;
 import org.sylrsykssoft.java.musbands.admin.musical.genre.domain.MusicalGenre;
 
-@Component("musicalGenreRepository")
+@Component(MusicalGenreConstants.REPOSITORY_NAME)
 @RepositoryRestResource(collectionResourceRel = MusicalGenreConstants.REPOSITORY_REST_COLLECTION_RESOURCE_REL, path = MusicalGenreConstants.REPOSITORY_REST_RESOURCE_PATH)
 @Transactional
 public interface MusicalGenreRepository extends BaseAdminRepository<MusicalGenre> {
