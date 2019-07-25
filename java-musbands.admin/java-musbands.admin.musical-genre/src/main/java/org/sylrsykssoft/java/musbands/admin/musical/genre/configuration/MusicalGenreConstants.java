@@ -13,7 +13,11 @@ public final class MusicalGenreConstants {
 
 	// CONTROLLER //
 	public static final String CONTROLLER_NAME = "musicalGenreController";
-	public static final String CONTROLLER_REQUEST_MAPPING = "/admin/musicalGenres";
+	public static final String CONTROLLER_TEST_NAME = "musicalGenreControllerTest";
+	public static final String CONTROLLER_REQUEST_MAPPING_BASE_PATH = "${spring.data.rest.base-path}";
+	public static final String CONTROLLER_REQUEST_MAPPING = CONTROLLER_REQUEST_MAPPING_BASE_PATH + "/admin/musicalGenres";
+	public static final String CONTROLLER_REQUEST_MAPPING_BASE_PATH_TEST = "";
+	public static final String CONTROLLER_REQUEST_MAPPING_TEST = CONTROLLER_REQUEST_MAPPING_BASE_PATH_TEST + "/admin/musicalGenres";
 	public static final String CONTROLLER_GET_FIND_BY_ID = "/findOne/id/{id}";
 	public static final String CONTROLLER_GET_FIND_BY_NAME_MAPPING = "/findOne/name/{name}";
 	public static final String CONTROLLER_GET_FIND_BY_EXAMPLE = "/findOne/example";
