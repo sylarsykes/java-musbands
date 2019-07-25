@@ -11,7 +11,7 @@ import org.sylrsykssoft.coreapi.framework.database.repository.BaseAdminRepositor
 import org.sylrsykssoft.java.musbands.admin.function.member.configuration.FunctionMemberConstants;
 import org.sylrsykssoft.java.musbands.admin.function.member.domain.FunctionMember;
 
-@Component("functionMemberRepository")
+@Component(FunctionMemberConstants.REPOSITORY_NAME)
 @RepositoryRestResource(collectionResourceRel = FunctionMemberConstants.REPOSITORY_REST_COLLECTION_RESOURCE_REL, path = FunctionMemberConstants.REPOSITORY_REST_RESOURCE_PATH)
 @Transactional
 public interface FunctionMemberRepository extends BaseAdminRepository<FunctionMember> {

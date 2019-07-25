@@ -9,7 +9,7 @@ package org.sylrsykssoft.java.musbands.admin.function.member.configuration;
 public final class FunctionMemberConstants {
 	// CACHE //
 	public static final String CACHE_NAME = "functionMember";
-	public static final String CACHE_MANGER_BEAN_NAME = "functionMemberCacheManager";
+	public static final String CACHE_MANGER_BEAN_NAME = "musbandsAdminCacheManager";
 
 	// CONTROLLER //
 	public static final String CONTROLLER_NAME = "functionMemberController";
@@ -29,6 +29,7 @@ public final class FunctionMemberConstants {
 	// REPOSITORY //
 	public static final String REPOSITORY_REST_COLLECTION_RESOURCE_REL = "function_member";
 	public static final String REPOSITORY_REST_RESOURCE_PATH = "function_member";
+	public static final String REPOSITORY_NAME = "functionMemberRepository";
 	public static final String REPOSITORY_TABLE_NAME = "function_member";
 	public static final String REPOSITORY_ENTITY_NAME = "function_member";
 	
