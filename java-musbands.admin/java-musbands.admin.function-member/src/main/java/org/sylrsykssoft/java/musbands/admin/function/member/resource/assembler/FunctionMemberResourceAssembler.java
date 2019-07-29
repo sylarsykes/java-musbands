@@ -1,34 +1,28 @@
 package org.sylrsykssoft.java.musbands.admin.function.member.resource.assembler;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-
 import java.beans.ConstructorProperties;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.sylrsykssoft.coreapi.framework.library.mapper.ModelMapperFunction;
+import org.sylrsykssoft.coreapi.framework.web.resource.assembler.BaseAdminResourceAssembler;
+import org.sylrsykssoft.java.musbands.admin.function.member.configuration.FunctionMemberConstants;
+import org.sylrsykssoft.java.musbands.admin.function.member.controller.FunctionMemberController;
 import org.sylrsykssoft.java.musbands.admin.function.member.domain.FunctionMember;
 import org.sylrsykssoft.java.musbands.admin.function.member.resource.FunctionMemberResource;
-
 
 /**
  * The Class BaseResourceAssembler.
  * 
  * @author juan.gonzalez.fernandez.jgf
  */
-public class FunctionMemberResourceAssembler extends ResourceAssemblerSupport<FunctionMember, FunctionMemberResource> {
+public class FunctionMemberResourceAssembler extends BaseAdminResourceAssembler<FunctionMemberController, FunctionMember, FunctionMemberResource> {
 
-	/** The entity class. */
-	private Class<FunctionMember> entityClass;
-	
-	/** The parameters. */
-	private Object[] parameters;
 	
 	/** The base entity resource model mapper function. */
 	@Autowired
-	@Qualifier("FunctionMemberMapperToResourceFunction")
-	private ModelMapperFunction<FunctionMember, FunctionMemberResource> baseEntityResourceModelMapperFunction;
+	@Qualifier(FunctionMemberConstants.MAPPER_RESOURCE_FUNCTION)
+	private ModelMapperFunction<FunctionMember, FunctionMemberResource> functionMemberMapperToResource;
 	
 	/**
 	 * Instantiates a new base resource assembler.
@@ -36,11 +30,9 @@ public class FunctionMemberResourceAssembler extends ResourceAssemblerSupport<Fu
 	 * @param controllerClass the controller class
 	 * @param resourceType the resource type
 	 */
-	@ConstructorProperties({ "controllerClass", "resourceType" })
-	public FunctionMemberResourceAssembler(Class<FunctionMember> controllerClass, Class<FunctionMemberResource> resourceType) {
-		super(controllerClass, resourceType);
-		entityClass = controllerClass;
-		parameters = new Object[0];
+	@ConstructorProperties({ "controllerClass", "entityClass", "resourceType" })
+	public FunctionMemberResourceAssembler(final Class<FunctionMemberController> controllerClass, final Class<FunctionMember> entityClass, final Class<FunctionMemberResource> resourceType) {
+		super(controllerClass, entityClass, resourceType);
 	}
 	
 	/**
@@ -50,25 +42,17 @@ public class FunctionMemberResourceAssembler extends ResourceAssemblerSupport<Fu
 	 * @param resourceType the resource type
 	 * @param parameters the parameters
 	 */
-	@ConstructorProperties({ "controllerClass", "resourceType", "parameters" })
-	public FunctionMemberResourceAssembler(Class<FunctionMember> controllerClass, Class<FunctionMemberResource> resourceType, final Object ...parameters) {
-		super(controllerClass, resourceType);
-		entityClass = controllerClass;
-		this.parameters = parameters;
+	@ConstructorProperties({ "controllerClass", "entityClass", "resourceType", "parameters" })
+	public FunctionMemberResourceAssembler(final Class<FunctionMemberController> controllerClass, final Class<FunctionMember> entityClass, final Class<FunctionMemberResource> resourceType, final Object ...parameters) {
+		super(controllerClass, entityClass, resourceType, parameters);
 	}
-	
+
 	/**
-	 * To resource.
-	 *
-	 * @param entity the entity
-	 * @return the base resource
+	 * {inheritDoc} 
 	 */
 	@Override
-	public FunctionMemberResource toResource(final FunctionMember entity) {
-		final FunctionMemberResource instance = baseEntityResourceModelMapperFunction.apply(entity);
-		instance.add(linkTo(entityClass, parameters).slash(entity.getEntityId()).withSelfRel());
-		
-		return instance;
+	public ModelMapperFunction<FunctionMember, FunctionMemberResource> getAdminMapperToResourceFunction() {
+		return functionMemberMapperToResource;
 	}
 
 }

@@ -1,13 +1,13 @@
 package org.sylrsykssoft.java.musbands.admin.musical.genre.resource.assembler;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-
 import java.beans.ConstructorProperties;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.sylrsykssoft.coreapi.framework.library.mapper.ModelMapperFunction;
+import org.sylrsykssoft.coreapi.framework.web.resource.assembler.BaseAdminResourceAssembler;
+import org.sylrsykssoft.java.musbands.admin.musical.genre.configuration.MusicalGenreConstants;
+import org.sylrsykssoft.java.musbands.admin.musical.genre.controller.MusicalGenreController;
 import org.sylrsykssoft.java.musbands.admin.musical.genre.domain.MusicalGenre;
 import org.sylrsykssoft.java.musbands.admin.musical.genre.resource.MusicalGenreResource;
 
@@ -17,18 +17,12 @@ import org.sylrsykssoft.java.musbands.admin.musical.genre.resource.MusicalGenreR
  * 
  * @author juan.gonzalez.fernandez.jgf
  */
-public class MusicalGenreResourceAssembler extends ResourceAssemblerSupport<MusicalGenre, MusicalGenreResource> {
+public class MusicalGenreResourceAssembler extends BaseAdminResourceAssembler<MusicalGenreController, MusicalGenre, MusicalGenreResource> {
 
-	/** The entity class. */
-	private Class<MusicalGenre> entityClass;
-	
-	/** The parameters. */
-	private Object[] parameters;
-	
 	/** The base entity resource model mapper function. */
 	@Autowired
-	@Qualifier("musicalGenreMapperToResourceFunction")
-	private ModelMapperFunction<MusicalGenre, MusicalGenreResource> baseEntityResourceModelMapperFunction;
+	@Qualifier(MusicalGenreConstants.MAPPER_RESOURCE_FUNCTION)
+	private ModelMapperFunction<MusicalGenre, MusicalGenreResource> musicalGenreMapperToResourceFunction;
 	
 	/**
 	 * Instantiates a new base resource assembler.
@@ -36,11 +30,9 @@ public class MusicalGenreResourceAssembler extends ResourceAssemblerSupport<Musi
 	 * @param controllerClass the controller class
 	 * @param resourceType the resource type
 	 */
-	@ConstructorProperties({ "controllerClass", "resourceType" })
-	public MusicalGenreResourceAssembler(Class<MusicalGenre> controllerClass, Class<MusicalGenreResource> resourceType) {
-		super(controllerClass, resourceType);
-		entityClass = controllerClass;
-		parameters = new Object[0];
+	@ConstructorProperties({ "controllerClass", "entityClass", "resourceType" })
+	public MusicalGenreResourceAssembler(final Class<MusicalGenreController> controllerClass, final Class<MusicalGenre> entityClass, final Class<MusicalGenreResource> resourceType) {
+		super(controllerClass, entityClass, resourceType);
 	}
 	
 	/**
@@ -50,25 +42,17 @@ public class MusicalGenreResourceAssembler extends ResourceAssemblerSupport<Musi
 	 * @param resourceType the resource type
 	 * @param parameters the parameters
 	 */
-	@ConstructorProperties({ "controllerClass", "resourceType", "parameters" })
-	public MusicalGenreResourceAssembler(Class<MusicalGenre> controllerClass, Class<MusicalGenreResource> resourceType, final Object ...parameters) {
-		super(controllerClass, resourceType);
-		entityClass = controllerClass;
-		this.parameters = parameters;
+	@ConstructorProperties({ "controllerClass", "entityClass", "resourceType", "parameters" })
+	public MusicalGenreResourceAssembler(final Class<MusicalGenreController> controllerClass, final Class<MusicalGenre> entityClass, final Class<MusicalGenreResource> resourceType, final Object ...parameters) {
+		super(controllerClass, entityClass, resourceType, parameters);
 	}
 	
 	/**
-	 * To resource.
-	 *
-	 * @param entity the entity
-	 * @return the base resource
+	 * {inheritDoc} 
 	 */
 	@Override
-	public MusicalGenreResource toResource(final MusicalGenre entity) {
-		final MusicalGenreResource instance = baseEntityResourceModelMapperFunction.apply(entity);
-		instance.add(linkTo(entityClass, parameters).slash(entity.getEntityId()).withSelfRel());
-		
-		return instance;
+	public ModelMapperFunction<MusicalGenre, MusicalGenreResource> getAdminMapperToResourceFunction() {
+		return musicalGenreMapperToResourceFunction;
 	}
 
 }

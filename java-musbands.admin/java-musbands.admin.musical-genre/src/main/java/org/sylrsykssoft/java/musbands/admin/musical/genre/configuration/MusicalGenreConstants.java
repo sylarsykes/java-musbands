@@ -28,6 +28,7 @@ public final class MusicalGenreConstants {
 
 	// MAPPER //
 	public static final String MAPPER_RESOURCE_FUNCTION = "musicalGenreMapperToResourceFunction";
+	public static final String MAPPER_RESOURCE_ASSEMBLER = "musicalGenreResourceAssembler";
 	public static final String MAPPER_ENTITY_FUNCTION = "musicalGenreMapperToEntityFunction";
 	
 	// REPOSITORY //

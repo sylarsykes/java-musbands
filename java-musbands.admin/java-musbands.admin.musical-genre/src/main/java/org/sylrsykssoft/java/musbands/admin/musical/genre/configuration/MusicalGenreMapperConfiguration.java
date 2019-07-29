@@ -5,8 +5,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.sylrsykssoft.coreapi.framework.library.mapper.ModelMapperFunction;
+import org.sylrsykssoft.java.musbands.admin.musical.genre.controller.MusicalGenreController;
 import org.sylrsykssoft.java.musbands.admin.musical.genre.domain.MusicalGenre;
 import org.sylrsykssoft.java.musbands.admin.musical.genre.resource.MusicalGenreResource;
+import org.sylrsykssoft.java.musbands.admin.musical.genre.resource.assembler.MusicalGenreResourceAssembler;
 
 /**
  * MusicalGenreMapperConfiguration
@@ -27,6 +29,19 @@ public class MusicalGenreMapperConfiguration {
 	@Lazy(value = true)
 	public ModelMapperFunction<MusicalGenre, MusicalGenreResource> musicalGenreMapperToResourceFunction() {
 		return new ModelMapperFunction<MusicalGenre, MusicalGenreResource>(MusicalGenre.class, MusicalGenreResource.class);
+	}
+	
+	
+	/**
+	 * FunctionMember mapper function.
+	 *
+	 * @return the model mapper function
+	 */
+	@Bean(MusicalGenreConstants.MAPPER_RESOURCE_ASSEMBLER)
+	@Scope(value = "prototype")
+	@Lazy(value = true)
+	public MusicalGenreResourceAssembler musicalGenreResourceAssembler() {
+		return new MusicalGenreResourceAssembler(MusicalGenreController.class, MusicalGenre.class, MusicalGenreResource.class);
 	}
 	
 	/**

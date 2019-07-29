@@ -45,7 +45,6 @@
 		</repository>
 	</repositories>
 	
-
 	<properties>
 		<!-- Common -->
 		<developer.email>juan.gonzalez.fernandez.jgf@outlook.com</developer.email>
@@ -113,7 +112,6 @@
 			<artifactId>junit-platform-launcher</artifactId>
 			<scope>test</scope>
 		</dependency>	
-		
 		
 	</dependencies>
 
