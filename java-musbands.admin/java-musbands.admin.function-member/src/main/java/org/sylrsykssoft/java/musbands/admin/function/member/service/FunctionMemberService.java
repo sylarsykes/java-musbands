@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Service;
 import org.sylrsykssoft.coreapi.framework.database.exception.NotFoundEntityException;
 import org.sylrsykssoft.coreapi.framework.database.repository.BaseAdminRepository;
@@ -33,8 +34,8 @@ public class FunctionMemberService extends BaseAdminService<FunctionMember, Func
 	
 	/** Mapper resource bean */
 	@Autowired
-	@Qualifier(FunctionMemberConstants.MAPPER_RESOURCE_FUNCTION)
-	private ModelMapperFunction<FunctionMember, FunctionMemberResource> functionMemberMapperToResource;
+	@Qualifier(FunctionMemberConstants.MAPPER_RESOURCE_ASSEMBLER)
+	private ResourceAssemblerSupport<FunctionMember, FunctionMemberResource> functionMemberMapperToResource;
 	
 	/** Mapper entity bean */
 	@Autowired
@@ -72,7 +73,7 @@ public class FunctionMemberService extends BaseAdminService<FunctionMember, Func
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ModelMapperFunction<FunctionMember, FunctionMemberResource> mapperToResource() {
+	public ResourceAssemblerSupport<FunctionMember, FunctionMemberResource> mapperToResource() {
 		return functionMemberMapperToResource;
 	}
 

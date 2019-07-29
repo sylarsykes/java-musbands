@@ -28,6 +28,7 @@ public final class FunctionMemberConstants {
 
 	// MAPPER //
 	public static final String MAPPER_RESOURCE_FUNCTION = "functionMemberMapperToResourceFunction";
+	public static final String MAPPER_RESOURCE_ASSEMBLER = "functionMemberResourceAssembler";
 	public static final String MAPPER_ENTITY_FUNCTION = "functionMemberMapperToEntityFunction";
 	
 	// REPOSITORY //

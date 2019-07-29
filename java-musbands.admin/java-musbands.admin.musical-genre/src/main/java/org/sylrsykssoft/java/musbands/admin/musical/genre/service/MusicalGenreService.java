@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Service;
 import org.sylrsykssoft.coreapi.framework.database.exception.NotFoundEntityException;
 import org.sylrsykssoft.coreapi.framework.database.repository.BaseAdminRepository;
@@ -16,6 +17,7 @@ import org.sylrsykssoft.java.musbands.admin.musical.genre.configuration.MusicalG
 import org.sylrsykssoft.java.musbands.admin.musical.genre.domain.MusicalGenre;
 import org.sylrsykssoft.java.musbands.admin.musical.genre.repository.MusicalGenreRepository;
 import org.sylrsykssoft.java.musbands.admin.musical.genre.resource.MusicalGenreResource;
+import org.sylrsykssoft.java.musbands.admin.musical.genre.resource.assembler.MusicalGenreResourceAssembler;
 
 /**
  * MusicalGenreService service.
@@ -33,8 +35,8 @@ public class MusicalGenreService extends BaseAdminService<MusicalGenre, MusicalG
 	
 	/** Mapper resource bean */
 	@Autowired
-	@Qualifier(MusicalGenreConstants.MAPPER_RESOURCE_FUNCTION)
-	private ModelMapperFunction<MusicalGenre, MusicalGenreResource> musicalGenreMapperToResource;
+	@Qualifier(MusicalGenreConstants.MAPPER_RESOURCE_ASSEMBLER)
+	private MusicalGenreResourceAssembler musicalGenreMapperToResource;
 	
 	/** Mapper entity bean */
 	@Autowired
@@ -72,7 +74,7 @@ public class MusicalGenreService extends BaseAdminService<MusicalGenre, MusicalG
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ModelMapperFunction<MusicalGenre, MusicalGenreResource> mapperToResource() {
+	public ResourceAssemblerSupport<MusicalGenre, MusicalGenreResource> mapperToResource() {
 		return musicalGenreMapperToResource;
 	}
 

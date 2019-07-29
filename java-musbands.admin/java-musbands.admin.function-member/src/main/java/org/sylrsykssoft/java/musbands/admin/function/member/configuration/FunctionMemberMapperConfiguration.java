@@ -3,10 +3,11 @@ package org.sylrsykssoft.java.musbands.admin.function.member.configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Scope;
 import org.sylrsykssoft.coreapi.framework.library.mapper.ModelMapperFunction;
+import org.sylrsykssoft.java.musbands.admin.function.member.controller.FunctionMemberController;
 import org.sylrsykssoft.java.musbands.admin.function.member.domain.FunctionMember;
 import org.sylrsykssoft.java.musbands.admin.function.member.resource.FunctionMemberResource;
+import org.sylrsykssoft.java.musbands.admin.function.member.resource.assembler.FunctionMemberResourceAssembler;
 
 /**
  * FunctionMemberMapperConfiguration
@@ -23,10 +24,20 @@ public class FunctionMemberMapperConfiguration {
 	 * @return the model mapper function
 	 */
 	@Bean(FunctionMemberConstants.MAPPER_RESOURCE_FUNCTION)
-	@Scope(value = "prototype")
 	@Lazy(value = true)
-	public ModelMapperFunction<FunctionMember, FunctionMemberResource> FunctionMemberMapperToResourceFunction() {
+	public ModelMapperFunction<FunctionMember, FunctionMemberResource> functionMemberMapperToResourceFunction() {
 		return new ModelMapperFunction<FunctionMember, FunctionMemberResource>(FunctionMember.class, FunctionMemberResource.class);
+	}
+
+	/**
+	 * FunctionMember mapper function.
+	 *
+	 * @return the model mapper function
+	 */
+	@Bean(FunctionMemberConstants.MAPPER_RESOURCE_ASSEMBLER)
+	@Lazy(value = true)
+	public FunctionMemberResourceAssembler functionMemberResourceAssembler() {
+		return new FunctionMemberResourceAssembler(FunctionMemberController.class, FunctionMember.class, FunctionMemberResource.class);
 	}
 	
 	/**
@@ -35,9 +46,9 @@ public class FunctionMemberMapperConfiguration {
 	 * @return the model mapper function
 	 */
 	@Bean(FunctionMemberConstants.MAPPER_ENTITY_FUNCTION)
-	@Scope(value = "prototype")
 	@Lazy(value = true)
-	public ModelMapperFunction<FunctionMemberResource, FunctionMember> FunctionMemberMapperToEntityFunction() {
+	public ModelMapperFunction<FunctionMemberResource, FunctionMember> functionMemberMapperToEntityFunction() {
 		return new ModelMapperFunction<FunctionMemberResource, FunctionMember>(FunctionMemberResource.class, FunctionMember.class);
 	}
+	
 }
