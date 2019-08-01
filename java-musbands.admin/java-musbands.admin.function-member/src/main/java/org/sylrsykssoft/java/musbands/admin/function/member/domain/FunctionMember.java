@@ -1,5 +1,7 @@
 package org.sylrsykssoft.java.musbands.admin.function.member.domain;
 
+import java.beans.ConstructorProperties;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -34,13 +36,11 @@ import lombok.Singular;
 @Table(name = FunctionMemberConstants.REPOSITORY_TABLE_NAME)
 @Entity(name = FunctionMemberConstants.REPOSITORY_ENTITY_NAME)
 @Data
-@Builder(toBuilder = true)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @Setter
 @Getter
 @EqualsAndHashCode(callSuper = true, doNotUseGetters = true, exclude = "synonyms")
-//@ToString(callSuper = true)
 @EntityListeners({BaseListener.class})
 public class FunctionMember extends BaseAdmin {
 	
@@ -49,5 +49,22 @@ public class FunctionMember extends BaseAdmin {
 		joinColumns = @JoinColumn(name = "function_member_id", referencedColumnName = "id"), 
 		inverseJoinColumns = @JoinColumn(name = "function_member_synonymic_id", referencedColumnName = "id"))
 	private @Singular Set<FunctionMemberSynonymic> synonyms;
-
+	
+	/**
+	 * AllArgsConstructor
+	 * 
+	 * @param entityId
+	 * @param name
+	 * @param description
+	 * @param synonyms
+	 * @param createdAt
+	 * @param updatedAt
+	 * @param removedAt
+	 */
+	@Builder(builderMethodName = "functionMemberBuilder")
+	@ConstructorProperties({ "entityId", "name", "description", "synonyms", "createdAt", "updatedAt", "removedAt" })
+	public FunctionMember(Integer entityId, String name, String description, Set<FunctionMemberSynonymic> synonyms, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime removedAt) {
+		super(entityId, name, description, createdAt, updatedAt, removedAt);
+		this.synonyms = synonyms;
+	}
 }
