@@ -1,0 +1,1 @@
+CREATE SCHEMA `musbands_admin` DEFAULT CHARACTER SET utf8 ;

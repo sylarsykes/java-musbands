@@ -3,31 +3,48 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   
-  <parent>
+    <parent>
     <groupId>org.sylrsykssoft</groupId>
     <artifactId>java-musbands.musbands</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <relativePath>../</relativePath>
   </parent>
 
-  <artifactId>java-musbands.musbands.discographic</artifactId>
+  <artifactId>java-musbands.musbands.application</artifactId>
   <packaging>jar</packaging>
-  <name>java-musbands.musbands.discographic</name>
-  <description>Musbands Discographic Rest API</description>
-  <url>https://github.com/sylarsykes/java-musbands/tree/develop/java-musbands.musbands.discographic</url>
+  <name>java-musbands.musbands.application</name>
+  <description>Musbands Spring Boot Aplication</description>
+  <url>https://github.com/sylarsykes/java-musbands/tree/develop/java-musbands.musbands.application</url>
 
   <properties>
     <main.basedir>${basedir}/../../</main.basedir>
+    
+    <start-class>org.sylrsykssoft.java.musbands.musbands.application.MusbandsApplication</start-class>
   </properties>
 
+  <dependencies>
+  	
+  	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-devtools</artifactId>
+		<scope>runtime</scope>
+		<optional>true</optional>
+	</dependency>
+  
+  	<dependency>
+		<groupId>org.sylrsykssoft</groupId>
+		<artifactId>java-musbands.musbands.discographic</artifactId>
+		<version>${java-musbands.musbands.discographic.version}</version>
+	</dependency>
+	
+  </dependencies>
+  
   <build>
 	<plugins>
+		
 		<plugin>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-maven-plugin</artifactId>
-			<configuration>
-            	<skip>true</skip>
-        	</configuration>
 		</plugin>
 		
 	    <plugin>
@@ -36,5 +53,5 @@
 		</plugin>
 	</plugins>
   </build>
-
+  
 </project>

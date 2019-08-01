@@ -1,5 +1,6 @@
 package org.sylrsykssoft.java.musbands.admin.function.member.domain;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -27,7 +28,6 @@ import lombok.Singular;
 @Table(name = "function_member_synonymic")
 @Entity(name = "function_member_synonymic")
 @Data
-@Builder(toBuilder = true)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Setter
@@ -46,5 +46,13 @@ public class FunctionMemberSynonymic extends Base<Integer> {
 		joinColumns = @JoinColumn(name = "function_member_synonymic_id", referencedColumnName = "id"), 
 		inverseJoinColumns = @JoinColumn(name = "function_member_id", referencedColumnName = "id"))
     private @Singular Set<FunctionMember> functionMembers;
-    
+
+	
+	@Builder(builderMethodName = "functionMemberSynonymicBuilder")
+	public FunctionMemberSynonymic(Integer entityId, String name, Set<FunctionMember> functionMembers, LocalDateTime createdAt, LocalDateTime updatedAt) {
+		super(entityId, createdAt, updatedAt);
+		this.name = name;
+		this.functionMembers = functionMembers;
+	}
+	
 }
