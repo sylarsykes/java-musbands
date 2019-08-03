@@ -68,7 +68,7 @@ public class Discographic extends BaseEntity {
 
 	@Column(name = "end_year", nullable = true, columnDefinition = "SMALLINT")
     @Convert(converter = YearAttributeConverter.class, attributeName = "endYear")
-	private @NonNull Year endYear;
+	private @Nullable Year endYear;
 	
 	@Column(name = "website", nullable = true, length = MAX_LENGTH_NAME)
 	@URL
