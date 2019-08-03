@@ -1,9 +1,5 @@
 package org.sylrsykssoft.java.musbands.musbands.discographic.configuration;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.modelmapper.PropertyMap;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -13,7 +9,6 @@ import org.sylrsykssoft.java.musbands.musbands.discographic.controller.Discograp
 import org.sylrsykssoft.java.musbands.musbands.discographic.domain.Discographic;
 import org.sylrsykssoft.java.musbands.musbands.discographic.resource.DiscographicResource;
 import org.sylrsykssoft.java.musbands.musbands.discographic.resource.assembler.DiscographicResourceAssembler;
-import org.sylrsykssoft.java.musbands.musbands.discographic.resource.property.converter.YearModelMapperConverter;
 
 /**
  * MusicalGenreMapperConfiguration

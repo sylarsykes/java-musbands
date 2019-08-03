@@ -3,19 +3,19 @@ package org.sylrsykssoft.java.musbands.admin.musical.genre.service;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.Optional;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.sylrsykssoft.java.musbands.admin.musical.genre.MusicalGenreApplicationTests;
 import org.sylrsykssoft.java.musbands.admin.musical.genre.configuration.MusicalGenreTestsConfiguration;
@@ -27,8 +27,8 @@ import org.sylrsykssoft.java.musbands.admin.musical.genre.resource.MusicalGenreR
  * @author juan.gonzalez.fernandez.jgf
  *
  */
-@RunWith(SpringRunner.class)
 @SpringBootTest(classes = { MusicalGenreApplicationTests.class })
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = { MusicalGenreTestsConfiguration.class, }, loader = AnnotationConfigContextLoader.class)
 public class MusicalGenreServiceTest {
 
@@ -39,7 +39,7 @@ public class MusicalGenreServiceTest {
 	
 	Example<MusicalGenreResource> example;
 	
-	@Before
+	@BeforeEach
 	public void setUp() {
 		String name = "Pop punk";
 		String description = "Pop punk (also known as punk-pop) is a music genre that fuses elements of pop music with punk rock. Fast tempos, loud electric guitar distortion, and power chord changes are typically played under pop-influenced melodies, vocal styles with lighthearted lyrical themes including boredom and teenage romance.";
@@ -62,14 +62,14 @@ public class MusicalGenreServiceTest {
 	@Test
 	public void testFindAllMusicalGenres() {
 		Iterable<MusicalGenreResource> musicalGenres = musicalGenreService.findAll();
-		Assert.assertNotNull(musicalGenres);
+		assertNotNull(musicalGenres);
 	}
 	
 	// @see https://www.logicbig.com/tutorials/spring-framework/spring-data/query-example-matchers.html
 	@Test
 	public void testFindOneByExampleMusicalGenre() {
 		Optional<MusicalGenreResource> optResource = musicalGenreService.findByExample(example);
-		Assert.assertNotNull(optResource.get());
+		assertNotNull(optResource.get());
 	}
 	
 	@Test

@@ -3,21 +3,21 @@ package org.sylrsykssoft.java.musbands.admin.function.member.service;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.sylrsykssoft.java.musbands.admin.function.member.FunctionMemberApplicationTests;
 import org.sylrsykssoft.java.musbands.admin.function.member.configuration.FunctionMemberTestsConfiguration;
@@ -30,8 +30,8 @@ import org.sylrsykssoft.java.musbands.admin.function.member.resource.FunctionMem
  * @author juan.gonzalez.fernandez.jgf
  *
  */
-@RunWith(SpringRunner.class)
 @SpringBootTest(classes = { FunctionMemberApplicationTests.class })
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = { FunctionMemberTestsConfiguration.class, }, loader = AnnotationConfigContextLoader.class)
 public class FunctionMemberServiceTest {
 
@@ -42,7 +42,7 @@ public class FunctionMemberServiceTest {
 	
 	Example<FunctionMemberResource> example;
 	
-	@Before
+	@BeforeEach
 	public void setUp() {
 		String name = "Lead vocalist";
 		String description = "The lead vocalist in popular music is typically the member of a group or band whose voice is the most prominent in a performance where multiple voices may be heard. The lead singer either leads the vocal ensemble, or sets against the ensemble as the dominant sound. In vocal group performances, notably in soul and gospel music, and early rock and roll, the lead singer takes the main vocal part, with a chorus provided by other band members as backing vocalists.\r\n"
@@ -75,14 +75,14 @@ public class FunctionMemberServiceTest {
 	@Test
 	public void testFindAllFunctionMembers() {
 		Iterable<FunctionMemberResource> FunctionMembers = functionMemberService.findAll();
-		Assert.assertNotNull(FunctionMembers);
+		assertNotNull(FunctionMembers);
 	}
 	
 	// @see https://www.logicbig.com/tutorials/spring-framework/spring-data/query-example-matchers.html
 	@Test
 	public void testFindOneByExampleFunctionMember() {
 		Optional<FunctionMemberResource> optResource = functionMemberService.findByExample(example);
-		Assert.assertNotNull(optResource.get());
+		assertNotNull(optResource.get());
 	}
 	
 	@Test
