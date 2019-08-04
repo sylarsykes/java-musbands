@@ -2,6 +2,7 @@ package org.sylrsykssoft.java.musbands.admin.application.configuration;
 
 import java.util.Arrays;
 
+import org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.concurrent.ConcurrentMapCache;
@@ -26,7 +27,10 @@ import org.sylrsykssoft.java.musbands.admin.musical.genre.configuration.MusicalG
 	"org.sylrsykssoft.java.musbands.admin.musical.genre.*",
 	"org.sylrsykssoft.java.musbands.admin.function.member.*" 
 })
-//@EnableJpaRepositories({ "org.sylrsykssoft.java.musbands.admin.musical.genre.repository", "org.sylrsykssoft.java.musbands.admin.function.member.repository" })
+//@EnableJpaRepositories({ 
+//	"org.sylrsykssoft.java.musbands.admin.musical.genre.repository", 
+//	"org.sylrsykssoft.java.musbands.admin.function.member.repository" 
+//})
 @EnableCaching
 public class MusbandsAdminConfiguration {
 
@@ -42,6 +46,7 @@ public class MusbandsAdminConfiguration {
 		cacheManager.setCaches(Arrays.asList(new ConcurrentMapCache(MusbandsAdminConstants.CACHE_NAME),
 				new ConcurrentMapCache(MusicalGenreConstants.CACHE_NAME),
 				new ConcurrentMapCache(FunctionMemberConstants.CACHE_NAME)));
+		PhysicalNamingStrategyStandardImpl sdfd = null;
 		return cacheManager;
 	}
 }
