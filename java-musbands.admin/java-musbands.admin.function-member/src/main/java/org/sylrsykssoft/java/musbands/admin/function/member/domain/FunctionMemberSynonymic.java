@@ -13,6 +13,7 @@ import javax.persistence.Table;
 
 import org.sylrsykssoft.coreapi.framework.api.model.Base;
 import org.sylrsykssoft.coreapi.framework.database.model.listener.BaseListener;
+import org.sylrsykssoft.java.musbands.admin.function.member.configuration.FunctionMemberSynonymicConstants;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -25,8 +26,8 @@ import lombok.NonNull;
 import lombok.Setter;
 import lombok.Singular;
 
-@Table(name = "function_member_synonymic")
-@Entity(name = "function_member_synonymic")
+@Table(name = FunctionMemberSynonymicConstants.REPOSITORY_TABLE_NAME)
+@Entity(name = FunctionMemberSynonymicConstants.REPOSITORY_ENTITY_NAME)
 @Data
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)

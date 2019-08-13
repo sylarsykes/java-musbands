@@ -65,7 +65,7 @@ public class FunctionMemberServiceTest {
 	@Test
 	public void testCreateFunctionMember() {
 		String name = "Lead vocalist";
-		final FunctionMemberResource FunctionMemberSaved = functionMemberService.save(domain);
+		final FunctionMemberResource FunctionMemberSaved = functionMemberService.create(domain);
 
 		assertThat("Entity did not get an generated Id!", FunctionMemberSaved.getEntityId(), greaterThan(-1));
         assertThat("Entity name did not match!", FunctionMemberSaved.getName(), is(name));
@@ -94,7 +94,7 @@ public class FunctionMemberServiceTest {
 		
 		assertThat("Entity name did not match!", resourceGet.getName(), is(name));
 		
-		FunctionMemberResource resourceUpdated = functionMemberService.save(FunctionMemberResource.functionMemberResourceBuilder().entityId(resourceGet.getEntityId()).name(resourceGet.getName())
+		FunctionMemberResource resourceUpdated = functionMemberService.update(FunctionMemberResource.functionMemberResourceBuilder().entityId(resourceGet.getEntityId()).name(resourceGet.getName())
 				.description(resourceGet.getDescription() + " El ir.").build());
 		
 		assertThat("Entity id did not match!", resourceUpdated.getEntityId(), is(resourceGet.getEntityId()));

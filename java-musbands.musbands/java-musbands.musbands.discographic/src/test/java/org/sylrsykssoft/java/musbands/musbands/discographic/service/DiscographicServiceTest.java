@@ -59,7 +59,7 @@ public class DiscographicServiceTest {
 	@Test
 	public void testCreateDiscographic() {
 		String name = "Visible Noise";
-		final DiscographicResource musicalGenreSaved = discographicService.save(domain);
+		final DiscographicResource musicalGenreSaved = discographicService.create(domain);
 
 		assertThat("Entity did not get an generated Id!", musicalGenreSaved.getEntityId(), greaterThan((long) -1));
 		assertThat("Entity name did not match!", musicalGenreSaved.getName(), is(name));
@@ -90,7 +90,7 @@ public class DiscographicServiceTest {
 		assertThat("Entity name did not match!", resourceGet.getName(), is(name));
 
 		DiscographicResource resourceUpdated = discographicService
-				.save(DiscographicResource.discographicResourceBuilder().entityId(resourceGet.getEntityId())
+				.update(DiscographicResource.discographicResourceBuilder().entityId(resourceGet.getEntityId())
 						.name(resourceGet.getName()).description(resourceGet.getDescription() + " El ir.").build());
 
 		assertThat("Entity id did not match!", resourceUpdated.getEntityId(), is(resourceGet.getEntityId()));
