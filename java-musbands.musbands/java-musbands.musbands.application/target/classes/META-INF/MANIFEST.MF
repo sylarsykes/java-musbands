@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Implementation-Title: java-musbands.musbands.application
+Implementation-Version: 0.0.1-SNAPSHOT
+Build-Jdk-Spec: 1.8
+Created-By: Maven Integration for Eclipse
+Main-Class: org.sylrsykssoft.java.musbands.musbands.application.Musban
+ dsApplication
+

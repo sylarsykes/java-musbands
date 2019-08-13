@@ -21,6 +21,7 @@
     <!-- Musbands Dependencies -->
     <java-musbands.musbands.version>${project.version}</java-musbands.musbands.version>
     <java-musbands.musbands.discographic.version>${project.version}</java-musbands.musbands.discographic.version>
+    <java-musbands.musbands.band.version>${project.version}</java-musbands.musbands.band.version>
   </properties>
   
   <dependencies>
@@ -48,6 +49,7 @@
   
   <modules>
     <module>java-musbands.musbands.discographic</module>
+    <module>java-musbands.musbands.band</module>
     <module>java-musbands.musbands.application</module>
   </modules>
 </project>

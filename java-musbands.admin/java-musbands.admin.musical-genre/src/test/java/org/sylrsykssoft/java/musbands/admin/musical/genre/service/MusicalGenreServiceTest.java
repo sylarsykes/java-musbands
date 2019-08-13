@@ -52,7 +52,7 @@ public class MusicalGenreServiceTest {
 	@Test
 	public void testCreateMusicalGenre() {
 		String name = "Pop punk";
-		final MusicalGenreResource musicalGenreSaved = musicalGenreService.save(domain);
+		final MusicalGenreResource musicalGenreSaved = musicalGenreService.create(domain);
 
 		assertThat("Entity did not get an generated Id!", musicalGenreSaved.getEntityId(), greaterThan(-1));
         assertThat("Entity name did not match!", musicalGenreSaved.getName(), is(name));
@@ -81,7 +81,7 @@ public class MusicalGenreServiceTest {
 		
 		assertThat("Entity name did not match!", resourceGet.getName(), is(name));
 		
-		MusicalGenreResource resourceUpdated = musicalGenreService.save(MusicalGenreResource.musicalGenreResourceBuilder().entityId(resourceGet.getEntityId()).name(resourceGet.getName())
+		MusicalGenreResource resourceUpdated = musicalGenreService.update(MusicalGenreResource.musicalGenreResourceBuilder().entityId(resourceGet.getEntityId()).name(resourceGet.getName())
 				.description(resourceGet.getDescription() + " El ir.").build());
 		
 		assertThat("Entity id did not match!", resourceUpdated.getEntityId(), is(resourceGet.getEntityId()));

@@ -10,11 +10,11 @@
     <relativePath>../</relativePath>
   </parent>
 
-  <artifactId>java-musbands.musbands.discographic</artifactId>
+  <artifactId>java-musbands.musbands.band</artifactId>
   <packaging>jar</packaging>
-  <name>java-musbands.musbands.discographic</name>
-  <description>Musbands Discographic Rest API</description>
-  <url>https://github.com/sylarsykes/java-musbands/tree/develop/java-musbands.musbands.discographic</url>
+  <name>java-musbands.musbands.band</name>
+  <description>Musbands Band Rest API</description>
+  <url>https://github.com/sylarsykes/java-musbands/tree/develop/java-musbands.musbands.band</url>
 
   <properties>
     <main.basedir>${basedir}/../../</main.basedir>
@@ -23,8 +23,8 @@
   <dependencies>
 	<dependency>
 		<groupId>org.sylrsykssoft</groupId>
-		<artifactId>java-musbands.musbands.band</artifactId>
-		<version>${java-musbands.musbands.band.version}</version>
+		<artifactId>java-musbands.musbands.discographic</artifactId>
+		<version>${java-musbands.musbands.discographic.version}</version>
 	</dependency>
   </dependencies>
 

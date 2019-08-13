@@ -1,5 +1,6 @@
 package org.sylrsykssoft.java.musbands.admin.musical.genre.configuration;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
@@ -10,6 +11,7 @@ import org.springframework.context.annotation.PropertySource;
  *
  */
 @Configuration
+@ConfigurationProperties
 @PropertySource({ "classpath:database-test.properties" })
 public class MusicalGenreTestsConfiguration {
 

@@ -15,10 +15,12 @@ public final class MusicalGenreConstants {
 	public static final String CONTROLLER_NAME = "musicalGenreController";
 	public static final String CONTROLLER_TEST_NAME = "musicalGenreControllerTest";
 	public static final String CONTROLLER_REQUEST_MAPPING_BASE_PATH = "${spring.data.rest.base-path}";
-	public static final String CONTROLLER_REQUEST_MAPPING = CONTROLLER_REQUEST_MAPPING_BASE_PATH + "/musicalGenres";
+	public static final String CONTROLLER_REQUEST_NAME = "musicalGenres";
+	public static final String CONTROLLER_REQUEST_MAPPING = CONTROLLER_REQUEST_MAPPING_BASE_PATH + "/" + CONTROLLER_REQUEST_NAME;
 	public static final String CONTROLLER_REQUEST_MAPPING_BASE_PATH_TEST = "/admin";
 	public static final String CONTROLLER_REQUEST_MAPPING_TEST = CONTROLLER_REQUEST_MAPPING_BASE_PATH_TEST + "/musicalGenres";
 	public static final String CONTROLLER_GET_FIND_BY_ID = "/findOne/id/{id}";
+	public static final String CONTROLLER_GET_FIND_BY_ID2 = "/findOne/id2/{id}";
 	public static final String CONTROLLER_GET_FIND_BY_NAME_MAPPING = "/findOne/name/{name}";
 	public static final String CONTROLLER_GET_FIND_BY_EXAMPLE = "/findOne/example";
 	public static final String CONTROLLER_GET_FIND_ALL_BY_EXAMPLE = "/findAll/example";
