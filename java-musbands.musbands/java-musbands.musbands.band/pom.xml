@@ -26,6 +26,11 @@
 		<artifactId>java-musbands.musbands.discographic</artifactId>
 		<version>${java-musbands.musbands.discographic.version}</version>
 	</dependency>
+	<dependency>
+		<groupId>org.sylrsykssoft</groupId>
+		<artifactId>java-musbands.musbands.member</artifactId>
+		<version>${java-musbands.musbands.member.version}</version>
+	</dependency>
   </dependencies>
 
   <build>

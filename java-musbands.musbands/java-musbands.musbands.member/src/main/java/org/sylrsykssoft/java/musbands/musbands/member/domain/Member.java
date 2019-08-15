@@ -1,5 +1,6 @@
-package org.sylrsykssoft.java.musbands.musbands.band.domain;
+package org.sylrsykssoft.java.musbands.musbands.member.domain;
 
+import java.time.LocalDateTime;
 import java.time.Year;
 import java.util.Set;
 
@@ -7,19 +8,16 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.validator.constraints.URL;
 import org.springframework.lang.Nullable;
 import org.sylrsykssoft.coreapi.framework.api.model.BaseEntity;
 import org.sylrsykssoft.coreapi.framework.database.model.listener.BaseListener;
-import org.sylrsykssoft.java.musbands.musbands.band.admin.domain.BandMusicalGenre;
+import org.sylrsykssoft.java.musbands.musbands.band.admin.domain.BandFunctionMember;
+import org.sylrsykssoft.java.musbands.musbands.band.admin.domain.MemberInstrument;
 import org.sylrsykssoft.java.musbands.musbands.band.configuration.BandConstants;
-import org.sylrsykssoft.java.musbands.musbands.discographic.domain.Discographic;
+import org.sylrsykssoft.java.musbands.musbands.band.domain.BandMember;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -33,7 +31,7 @@ import lombok.Setter;
 import lombok.Singular;
 
 /**
- * Entity band
+ * Entity member
  * 
  * @author juan.gonzalez.fernandez.jgf
  *
@@ -46,9 +44,9 @@ import lombok.Singular;
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @Setter
 @Getter
-@EqualsAndHashCode(callSuper = true, doNotUseGetters = true, exclude = { "musicalGenres", "members", "discographics" })
+@EqualsAndHashCode(callSuper = true, doNotUseGetters = true)
 @EntityListeners({BaseListener.class})
-public class Band extends BaseEntity {
+public class Member extends BaseEntity {
 	
 	public static final int MAX_LENGTH_NAME = 255;
 	public static final int MAX_LENGTH_DESCRIPTION = 10000;
@@ -59,9 +57,12 @@ public class Band extends BaseEntity {
 	@Column(name = "name", nullable = false, unique = true, length = MAX_LENGTH_NAME)
 	private @NonNull String name;
 	
-	@Column(name = "descriptiom", nullable = true, columnDefinition = "TEXT", length = MAX_LENGTH_DESCRIPTION)
-	private @Nullable String description;
-
+	@Column(name = "biography", nullable = true, columnDefinition = "TEXT", length = MAX_LENGTH_DESCRIPTION)
+	private @Nullable String biography;
+	
+	@Column(name = "born_date", nullable = true)
+	private @Nullable LocalDateTime bornDate;
+	
 	@Column(name = "start_year", nullable = false, columnDefinition = "SMALLINT")
 	private @NonNull Year startYear;
 	
@@ -74,35 +75,29 @@ public class Band extends BaseEntity {
 	@Column(name = "end_year", nullable = true, columnDefinition = "SMALLINT")
 	private @Nullable Year endYear;
 	
-	@Column(name = "website", nullable = true, length = MAX_LENGTH_NAME)
-	@URL
-	private @Nullable String website;
-	
 	// Relationships
-	@OneToMany(mappedBy = "band")
-	private @Singular Set<BandMusicalGenre> musicalGenres;
-
-	@OneToMany(mappedBy = "band", cascade = CascadeType.ALL)
-	private @Singular Set<BandMember> members;
+	@OneToMany(mappedBy = "member")
+	private @Singular Set<BandFunctionMember> functionMembers;
 	
-	@ManyToMany
-	@JoinTable(name = "discographic_bands", 
-		joinColumns = @JoinColumn(name = "fk_band_id", referencedColumnName = "id"), 
-		inverseJoinColumns = @JoinColumn(name = "fk_discographic_id", referencedColumnName = "id"))
-    private @Singular Set<Discographic> discographics;
-    
+	@OneToMany(mappedBy = "member")
+	private @Singular Set<MemberInstrument> instruments;
+
+	@OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+	private @Singular Set<BandMember> bands;
+
+	// Builder
 	/**
-	 * BandBuilder
+	 * MemberBuilder
 	 * 
 	 * @author juan.gonzalez.fernandez.jgf
 	 *
 	 */
-    public static class BandBuilder extends BaseEntityBuilder<Band, BandBuilder> {
+    public static class MemberBuilder extends BaseEntityBuilder<Member, MemberBuilder> {
     	/**
     	 * {inheritDoc}
     	 */
     	@Override
-    	protected BandBuilder self() {
+    	protected MemberBuilder self() {
 			return this;
 		}
     	
