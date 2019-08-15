@@ -1,4 +1,4 @@
-package org.sylrsykssoft.java.musbands.musbands.band.domain;
+package org.sylrsykssoft.java.musbands.musbands.band.admin.domain;
 
 import java.beans.ConstructorProperties;
 import java.time.LocalDateTime;
@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import org.sylrsykssoft.coreapi.framework.api.model.BaseAdmin;
 import org.sylrsykssoft.coreapi.framework.database.model.listener.BaseListener;
 import org.sylrsykssoft.java.musbands.musbands.band.configuration.BandMusicalGenreConstants;
+import org.sylrsykssoft.java.musbands.musbands.band.domain.Band;
 
 import lombok.AccessLevel;
 import lombok.Builder;

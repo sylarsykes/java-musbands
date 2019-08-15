@@ -1,4 +1,4 @@
-package org.sylrsykssoft.java.musbands.admin.function.member.configuration;
+package org.sylrsykssoft.java.musbands.musbands.band.configuration;
 
 /**
  * FunctionMemberConstants
@@ -6,7 +6,10 @@ package org.sylrsykssoft.java.musbands.admin.function.member.configuration;
  * @author juan.gonzalez.fernandez.jgf
  *
  */
-public final class FunctionMemberSynonymicConstants {
+public final class BandFunctionMemberSynonymicConstants {
+	public static final String CONTROLLER_REQUEST_NAME = "bandFunctionMemberSynonims";
+	public static final String CONTROLLER_REQUEST_NAME_BACKUP = "functionMemberSynonims";
+	
 	// REPOSITORY //
 	public static final String REPOSITORY_NAME = "functionMemberSynonymicRepository";
 	public static final String REPOSITORY_TABLE_NAME = "function_member_synonymic";
@@ -23,7 +26,7 @@ public final class FunctionMemberSynonymicConstants {
 	 * should be prevented from constructing objects of this class, by declaring
 	 * this private constructor.
 	 */
-	private FunctionMemberSynonymicConstants() {
+	private BandFunctionMemberSynonymicConstants() {
 		throw new AssertionError();
 	}
 

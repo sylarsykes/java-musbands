@@ -82,6 +82,7 @@ public class Discographic extends BaseEntity {
 	@URL
 	private @Nullable String website;
 
+	// Relationships
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "discographic_bands", 
 		joinColumns = @JoinColumn(name = "fk_discographic_id", referencedColumnName = "id"), 
@@ -92,8 +93,7 @@ public class Discographic extends BaseEntity {
 	/**
 	 * DiscographicBuilder 
 	 */
-	@SuppressWarnings("rawtypes")
-	public static class DiscographicBuilder extends BaseEntityBuilder {
+	public static class DiscographicBuilder extends BaseEntityBuilder<Discographic, DiscographicBuilder> {
 		
 		public DiscographicBuilder startYear(final Short startYear) {
 			return startYear(Year.of(startYear));
@@ -113,6 +113,9 @@ public class Discographic extends BaseEntity {
 			return this;
 		}
 
+		/**
+		 * {inheritDoc}
+		 */
 		@Override
 		protected DiscographicBuilder self() {
 			return this;

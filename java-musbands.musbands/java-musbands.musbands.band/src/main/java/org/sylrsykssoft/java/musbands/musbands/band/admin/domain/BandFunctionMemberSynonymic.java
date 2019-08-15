@@ -1,4 +1,4 @@
-package org.sylrsykssoft.java.musbands.admin.function.member.domain;
+package org.sylrsykssoft.java.musbands.musbands.band.admin.domain;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 import org.sylrsykssoft.coreapi.framework.api.model.Base;
 import org.sylrsykssoft.coreapi.framework.database.model.listener.BaseListener;
-import org.sylrsykssoft.java.musbands.admin.function.member.configuration.FunctionMemberSynonymicConstants;
+import org.sylrsykssoft.java.musbands.musbands.band.configuration.BandFunctionMemberSynonymicConstants;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -26,8 +26,8 @@ import lombok.NonNull;
 import lombok.Setter;
 import lombok.Singular;
 
-@Table(name = FunctionMemberSynonymicConstants.REPOSITORY_TABLE_NAME)
-@Entity(name = FunctionMemberSynonymicConstants.REPOSITORY_ENTITY_NAME)
+@Table(name = BandFunctionMemberSynonymicConstants.REPOSITORY_TABLE_NAME)
+@Entity(name = BandFunctionMemberSynonymicConstants.REPOSITORY_ENTITY_NAME)
 @Data
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
@@ -35,7 +35,7 @@ import lombok.Singular;
 @Getter
 @EqualsAndHashCode(callSuper = false, doNotUseGetters = true)
 @EntityListeners({BaseListener.class})
-public class FunctionMemberSynonymic extends Base<Integer> {
+public class BandFunctionMemberSynonymic extends Base<Integer> {
 
 	public static final int MAX_LENGTH_NAME = 256;
 	
@@ -46,8 +46,9 @@ public class FunctionMemberSynonymic extends Base<Integer> {
 	@JoinTable(name = "function_member_synonymic_functionmembers", 
 		joinColumns = @JoinColumn(name = "function_member_synonymic_id", referencedColumnName = "id"), 
 		inverseJoinColumns = @JoinColumn(name = "function_member_id", referencedColumnName = "id"))
-    private @Singular Set<FunctionMember> functionMembers;
+    private @Singular Set<BandFunctionMember> functionMembers;
 
+	
 	/**
 	 * AllArgsConstructor
 	 * 
@@ -57,8 +58,8 @@ public class FunctionMemberSynonymic extends Base<Integer> {
 	 * @param createdAt
 	 * @param updatedAt
 	 */
-	@Builder(builderMethodName = "functionMemberSynonymicBuilder")
-	public FunctionMemberSynonymic(Integer entityId, String name, Set<FunctionMember> functionMembers, LocalDateTime createdAt, LocalDateTime updatedAt) {
+	@Builder(builderMethodName = "bandFunctionMemberSynonymicBuilder")
+	public BandFunctionMemberSynonymic(Integer entityId, String name, Set<BandFunctionMember> functionMembers, LocalDateTime createdAt, LocalDateTime updatedAt) {
 		super(entityId, createdAt, updatedAt);
 		this.name = name;
 		this.functionMembers = functionMembers;

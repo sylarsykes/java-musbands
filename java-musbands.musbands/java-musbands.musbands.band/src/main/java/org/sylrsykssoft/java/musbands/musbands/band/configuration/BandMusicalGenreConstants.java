@@ -1,12 +1,16 @@
 package org.sylrsykssoft.java.musbands.musbands.band.configuration;
 
 /**
- * FunctionMemberConstants
+ * BandMusicalGenreConstants
  * 
  * @author juan.gonzalez.fernandez.jgf
  *
  */
 public final class BandMusicalGenreConstants {
+	public static final String CONTROLLER_REQUEST_NAME = "bandMusicalGenres";
+	public static final String CONTROLLER_REQUEST_NAME_BACKUP = "musicalGenres";
+	
+	
 	// REPOSITORY //
 	public static final String REPOSITORY_NAME = "bandMusicalGenreRepository";
 	public static final String REPOSITORY_TABLE_NAME = "band_musical_genre";
